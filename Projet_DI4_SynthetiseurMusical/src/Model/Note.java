@@ -7,6 +7,7 @@ public class Note {
 	private String str;//la chaine avec les caractéristiques de la note
 	private double frequence;
 	private int duree;//duree de la note en ms
+	private String alt;
 	
 	//méthode calcul de fréquence
 }
