@@ -1,0 +1,9 @@
+Lancement du projet.
+Nous souhaitons mettre en place un synthétiseur musical qui, à partir d'un fichier texte décrivant une mélodie, générerait la-dite mélodie.
+
+Nous avons mis à profit la première séance pour faire des recherches sur les différentes librairies, outils, framework existant qui pourraient nous aider dans ce projet.
+Nous avons plusieurs pistes, en C/C++ avec l'utilisation d'OpenAL, ou FMOD, en java avec l'utilisation de l'API java Sound (voir "liens utiles.txt").
+Nous avons également regardé le format "lilypound" (le "LaTeX" de la musique) que nous souhaiterions utiliser comme base synthaxique.
+Nous avons aussi trouvé quelques api sur internet permettant de jouer avec le son (voir "liens utilies.txt"). 
+
+Pour la prochaine séance, nous allons tester ces différentes pistes afin de voir lesquelles nous permettent d'avoir les meilleurs résultats.

@@ -1,0 +1,13 @@
+	Le but de ce projet est, dans un premier temps, de pouvoir créer une musique à partir d'un fichier texte avec une syntaxe similaire à celle utilisée avec Lilypond, 
+c'est à dire de la forme suivante : "a2 a a b4 c"...
+
+
+	Nous allons donc pour répondre à cette demande, créer une classe permettant de lire le fichier texte et d'en extraire les fréquences des notes, la durée et le tempo de la partition,
+une classe qui va utiliser ces données afin de créer la courbe correspondant à la partition du fichier texte, et enfin une classe qui va lire cette courbe et créer le son correspondant.	
+
+
+	Ensuite, l'idée d'avoir une possibilitée de pouvoir manipuler le son (pouvoir modifier la fréquence ou la durée des notes par exemple) a été évoquée.
+	Une autre piste à développer après avoir le "corps" du projet est de pouvoir lire plusieurs voix différentes à la fois et de les lire en même temps pour 
+s'approcher d'une vraie mélodie.
+	Dans la finalité de ce projet, nous aimerios également pouvoir générer un fichier audio (en format mp3 par exemple) contenant la partition lue.
+	

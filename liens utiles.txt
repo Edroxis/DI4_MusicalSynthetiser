@@ -1,0 +1,19 @@
+﻿fréquence notes: http://jeanjacques.dialo.free.fr/frequenc.htm
+lilypound: http://lilypond.org/easier-editing.fr.html
+fresobaldi (lilypound editor): http://www.frescobaldi.org/
+
+Play with sounds: http://jfxr.frozenfractal.com/#
+                  http://github.grumdrig.com/jsfxr/
+                  http://www.superflashbros.net/as3sfxr/
+
+Java: 
+    javax.sound: http://www-igm.univ-mlv.fr/~dr/XPOSE2005/JavaSound_arinie/javasound/format.html
+    java sound demo: http://www.oracle.com/technetwork/java/index-139508.html
+
+C/C++:
+    OpenAL: http://loulou.developpez.com/tutoriels/openal/premiers-pas/
+    FMOD: https://openclassrooms.com/courses/apprenez-a-programmer-en-c/jouer-du-son-avec-fmod
+    Autres tutoriels pour FMOD : https://cuboidzone.wordpress.com/2013/07/26/tutorial-implementing-fmod/
+    et : http://glasnost.itcarlow.ie/~powerk/audio/AddFMODtoaproject.html
+    avec math.h et stdio: http://code18.blogspot.fr/2010/10/faire-du-son-par-programmation-c-partie.html
+    PortAudio Library : http://www.portaudio.com/
