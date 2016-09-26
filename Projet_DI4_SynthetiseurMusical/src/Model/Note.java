@@ -7,7 +7,21 @@ public class Note {
 	private String str;//la chaine avec les caractéristiques de la note
 	private double frequence;
 	private int duree;//duree de la note en ms
+	private Octave hauteur;
 	private Alteration alt;
+	
+	//Constructeur
+	public Note(String str) {
+		this.str = str;
+		construireNote();
+	}
+	
+	//Methodes
+	private void construireNote(){
+		//analyser chaine
+		//calcul durée
+		//calcul Fréquence
+	}
 	
 	//méthode calcul de fréquence
 }
