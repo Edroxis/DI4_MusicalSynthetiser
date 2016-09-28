@@ -11,9 +11,6 @@ import javax.sound.sampled.SourceDataLine;
 public class GenerateurSon {
 	protected static final int SAMPLE_RATE = 128 * 1024;
 	private int TEMPO = 120; //Nb de noires par min
-
-	//private static double[] freqTab = {27.5,30.8,32.7,36.7,41.2,43.6,49.0};//a,b,c,d,e,f
-	private static double[] freqTab = {440,494,523,587,659,698.5,784};//a,b,c,d,e,f
 	
 	public static void jouerMelodie(Partition part) throws LineUnavailableException {
 		final AudioFormat af = new AudioFormat(GenerateurSon.SAMPLE_RATE, 8, 1, true, true);
@@ -21,20 +18,13 @@ public class GenerateurSon {
 		line.open(af, GenerateurSon.SAMPLE_RATE);
 		line.start();
 		
-		int i;
-		double freq;
-		char c;
-		/*ArrayList<Character> notes = part.getNotes();
-		ArrayList<Character> temps = part.getNotes();
+		ArrayList<Note> noteList = part.getNotes();
 		
-		
-		for(i=0; i<notes.size() && i<temps.size(); i++)
-		{
-			c = notes.get(i);
-			freq = freqTab[(int)(c-'c')+2];
-			byte[] toneBuffer = createSinWaveBuffer(freq, 500);
-			int count = line.write(toneBuffer, 0, toneBuffer.length);
-		}*/
+		for(Note n : noteList){
+			System.out.println(1);
+			byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
+			int count = line.write(output, 0, output.length);
+		}
 		
 		line.drain();
 		line.close();

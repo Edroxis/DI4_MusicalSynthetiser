@@ -24,7 +24,7 @@ public enum Octave {
 		case 6: return FAD;
 		case 7: return SOL;
 		case 8: return SOLD;
-		case 9: return LAB;
+		case 9: return LA;
 		case 10: return LAD;
 		case 11: return SI;
 		default : return NONE;

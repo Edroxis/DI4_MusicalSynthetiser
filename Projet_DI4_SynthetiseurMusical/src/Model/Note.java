@@ -8,7 +8,6 @@ public class Note {
 	private double frequence;
 	private int duree;	// duree de la note en ms
 	private Octave hauteur;
-	private Temps dureeNote;
 	private int numOctave;
 
 	// Constructeur
@@ -23,6 +22,9 @@ public class Note {
 		analyserChaine();
 		calculFrequ();
 		calculDuree();
+		
+		//System.out.println(hauteur.toInt());
+		//System.out.println(frequence);
 	}
 
 	public double getFrequence() {
@@ -39,23 +41,27 @@ public class Note {
 		int numNote;
 		str.toLowerCase();
 		c = str.charAt(0);
+		
+		// trouver l'index de la note de l'enum Octave
+		numNote = (((int) c - (int) 'a' + 5) % 7)*2; 
+		if(numNote>5)
+			numNote--;
 
-		numNote = (int) c - (int) 'a' + 3; // trouver l'index de la note de
-											// l'enum Octave
-
-		if (str.indexOf("is") != -1 || 
-			str.indexOf('d') != str.lastIndexOf('d'))	// si dièse
+		if (str.indexOf("is") != -1 //|| 
+			/*str.indexOf('d') != str.lastIndexOf('d')*/)	// si dièse
 		{
 			numNote++;
 		}
 
-		if (str.indexOf("es") != -1 || 
-			str.indexOf('b') != str.lastIndexOf('b'))	// si bémole
+		if (str.indexOf("es") != -1 //|| 
+			/*str.indexOf('b') != str.lastIndexOf('b')*/)	// si bémole
 		{
 			numNote--;
 		}
 
 		hauteur = Octave.getNote(numNote);// Récupérer la note
+		
+		
 
 		// Calculer le num d'octave
 		if (str.indexOf("'") != str.lastIndexOf("'")) {
@@ -63,27 +69,6 @@ public class Note {
 		} else {
 			if (str.indexOf("'") == -1)
 				numOctave--;
-		}
-		
-		// Trouver duree note
-		c = str.charAt(str.length()-1);
-		if(str.endsWith("1")){
-			duree = Temps.RONDE.toInt();
-		}
-		else{	//default case
-			duree = Temps.NOIRE.toInt();
-		}
-		if(str.endsWith("2")){
-			duree = Temps.BLANCHE.toInt();
-		}
-		if(str.endsWith("4")){
-			duree = Temps.NOIRE.toInt();
-		}
-		if(str.endsWith("8")){
-			duree = Temps.CROCHE.toInt();
-		}
-		if(str.endsWith("16")){
-			duree = Temps.DOUBLE_CROCHE.toInt();
 		}
 	}
 
@@ -108,6 +93,23 @@ public class Note {
 	}
 
 	private void calculDuree() {
-		
+		if(str.endsWith("1")){
+			duree = Temps.RONDE.toInt();
+		}
+		else{	//default case
+			duree = Temps.NOIRE.toInt();
+		}
+		if(str.endsWith("2")){
+			duree = Temps.BLANCHE.toInt();
+		}
+		if(str.endsWith("4")){
+			duree = Temps.NOIRE.toInt();
+		}
+		if(str.endsWith("8")){
+			duree = Temps.CROCHE.toInt();
+		}
+		if(str.endsWith("16")){
+			duree = Temps.DOUBLE_CROCHE.toInt();
+		}
 	}
 }
