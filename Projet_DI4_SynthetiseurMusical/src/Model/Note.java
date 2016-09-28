@@ -25,6 +25,14 @@ public class Note {
 		calculDuree();
 	}
 
+	public double getFrequence() {
+		return frequence;
+	}
+
+	public int getDuree() {
+		return duree;
+	}
+
 	// Analyseur de chaines
 	private void analyserChaine() {
 		char c;
@@ -59,19 +67,24 @@ public class Note {
 		
 		// Trouver duree note
 		c = str.charAt(str.length()-1);
-		if((int)c >= (int)'0' &&	//si durée définie
-				(int)c <= (int)'9')
-		{
-			c = str.charAt(str.length()-2);
-			if((int)c >= (int)'0' &&	//si durée à 2 chiffres
-					(int)c <= (int)'9')
-			{
-				//PAS FINI ----------------------------------------------------
-			}
-			//else
+		if(str.endsWith("1")){
+			duree = Temps.RONDE.toInt();
 		}
-		else
-			dureeNote = Temps.NOIRE;
+		else{	//default case
+			duree = Temps.NOIRE.toInt();
+		}
+		if(str.endsWith("2")){
+			duree = Temps.BLANCHE.toInt();
+		}
+		if(str.endsWith("4")){
+			duree = Temps.NOIRE.toInt();
+		}
+		if(str.endsWith("8")){
+			duree = Temps.CROCHE.toInt();
+		}
+		if(str.endsWith("16")){
+			duree = Temps.DOUBLE_CROCHE.toInt();
+		}
 	}
 
 	private void calculFrequ() {

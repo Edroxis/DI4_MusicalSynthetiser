@@ -5,38 +5,32 @@ import java.util.ArrayList;;
 public class Partition {
 	
 	private String nomFichier;
-	private ArrayList<Character> notes;
-	private ArrayList<Character> temps;
+	private ArrayList<Note> notes;
 	
 	//Constructeurs
 	Partition(String nomFichier){
 		this.nomFichier = nomFichier;
-		notes = new ArrayList<Character>();
-		temps = new ArrayList<Character>();
+		notes = new ArrayList<Note>();
 		lectureFichier();
 	}
 	
 	//Accesseurs
-	public ArrayList<Character> getNotes(){
+	public ArrayList<Note> getNotes() {
 		return notes;
-	}
-	
-	public ArrayList<Character> getTemps(){
-		return temps;
 	}
 	
 	//Fonctions
 	public void lectureFichier(){	//prend nom de fichier
 		int i;
 		char c;
-		String contenuFichier = "c1 a2 c1 b2 c1";
-		for(i = 0; i<contenuFichier.length(); i++)
-		{
-			c = contenuFichier.charAt(i);
-			if(c>='a' && c<='g')
-				notes.add(c);
-			if(c=='1' || c=='2' || c=='4')
-				temps.add(c);
+		Note note;
+		String contenuFichier = "c4 a'2 c4 b2 c4";
+		
+		String[] noteList = contenuFichier.split(" ");
+		
+		for(String str : noteList){
+			note = new Note(str);
+			notes.add(note);
 		}
 	}
 }

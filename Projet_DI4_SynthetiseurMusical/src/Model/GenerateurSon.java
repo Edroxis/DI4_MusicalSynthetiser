@@ -24,7 +24,7 @@ public class GenerateurSon {
 		int i;
 		double freq;
 		char c;
-		ArrayList<Character> notes = part.getNotes();
+		/*ArrayList<Character> notes = part.getNotes();
 		ArrayList<Character> temps = part.getNotes();
 		
 		
@@ -34,7 +34,7 @@ public class GenerateurSon {
 			freq = freqTab[(int)(c-'c')+2];
 			byte[] toneBuffer = createSinWaveBuffer(freq, 500);
 			int count = line.write(toneBuffer, 0, toneBuffer.length);
-		}
+		}*/
 		
 		line.drain();
 		line.close();
