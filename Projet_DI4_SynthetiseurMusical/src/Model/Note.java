@@ -9,6 +9,7 @@ public class Note {
 	private int duree;	// duree de la note en ms
 	private Octave hauteur;
 	private int numOctave;
+	private Variation var;
 
 	// Constructeur
 	public Note(String str) {
@@ -23,8 +24,8 @@ public class Note {
 		calculFrequ();
 		calculDuree();
 		
-		//System.out.println(hauteur.toInt());
-		//System.out.println(frequence);
+		System.out.println(hauteur.toInt());
+		System.out.println(frequence);
 	}
 
 	public double getFrequence() {
@@ -42,23 +43,20 @@ public class Note {
 		str.toLowerCase();
 		c = str.charAt(0);
 		
-		// trouver l'index de la note de l'enum Octave
+		// trouver l'index de la note de l'enum Octave (sans altération)
 		numNote = (((int) c - (int) 'a' + 5) % 7)*2; 
 		if(numNote>5)
 			numNote--;
-
-		if (str.indexOf("is") != -1 //|| 
-			/*str.indexOf('d') != str.lastIndexOf('d')*/)	// si dièse
-		{
+		
+		//Prise en compte de l'altération
+		trouverVariation(str);
+		
+		if(var == Variation.DIESE)
 			numNote++;
-		}
-
-		if (str.indexOf("es") != -1 //|| 
-			/*str.indexOf('b') != str.lastIndexOf('b')*/)	// si bémole
-		{
+		if(var == Variation.BEMOLE)
 			numNote--;
-		}
 
+		numNote %= 12;
 		hauteur = Octave.getNote(numNote);// Récupérer la note
 		
 		
@@ -70,6 +68,18 @@ public class Note {
 			if (str.indexOf("'") == -1)
 				numOctave--;
 		}
+	}
+
+	private void trouverVariation(String str2) {
+		str2 = str2.substring(1);
+		var = Variation.NEUTRE;
+		//Si dièse
+		if(str2.indexOf('d')!=-1 || str2.indexOf("is")!=-1)
+			var = Variation.DIESE;
+		
+		//Si bémole
+		if(str2.indexOf('b')!=-1 || str2.indexOf("es")!=-1)
+			var = Variation.BEMOLE;
 	}
 
 	private void calculFrequ() {

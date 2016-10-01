@@ -24,7 +24,8 @@ public class Partition {
 		int i;
 		char c;
 		Note note;
-		String contenuFichier = "e' g'2 a' b' b'8 c'8 b' a'2 f' d' d'8 e'8 f'";
+		//String contenuFichier = "e' g'2 a' b' b'8 c'8 b' a'2 f' d' d'8 e'8 f'";
+		String contenuFichier = "a ad ais ab aes";
 		
 		String[] noteList = contenuFichier.split(" ");
 		

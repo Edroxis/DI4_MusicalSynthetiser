@@ -21,7 +21,6 @@ public class GenerateurSon {
 		ArrayList<Note> noteList = part.getNotes();
 		
 		for(Note n : noteList){
-			System.out.println(1);
 			byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
 			int count = line.write(output, 0, output.length);
 		}
