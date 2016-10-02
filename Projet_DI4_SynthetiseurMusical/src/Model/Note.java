@@ -4,7 +4,7 @@ public class Note {
 	public static final double FREQ_LA_3 = 440;	// fréquences du LA3 ou LA440
 	public static final double R = 1.05946;
 
-	private String str;	// la chaine avec les caractéristiques de la note
+	private String chaineCaracNote;	// la chaine avec les caractéristiques de la note
 	private double frequence;
 	private int duree;	// duree de la note en ms
 	private Octave hauteur;
@@ -13,7 +13,7 @@ public class Note {
 
 	// Constructeur
 	public Note(String str) {
-		this.str = str;
+		this.chaineCaracNote = str;
 		numOctave = 3;
 		construireNote();
 	}
@@ -39,18 +39,18 @@ public class Note {
 
 	// Analyseur de chaines
 	private void analyserChaine() {
-		char c;
+		char firstLetter;
 		int numNote;
-		str.toLowerCase();
-		c = str.charAt(0);
+		chaineCaracNote.toLowerCase();
+		firstLetter = chaineCaracNote.charAt(0);
 		
 		// trouver l'index de la note de l'enum Octave (sans altération)
-		numNote = (((int) c - (int) 'a' + 5) % 7)*2; 
+		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
 		if(numNote>5)
 			numNote--;
 		
 		//Prise en compte de l'altération
-		trouverVariation(str);
+		trouverVariation(chaineCaracNote);
 		
 		if(var == Variation.DIESE)
 			numNote++;
@@ -63,7 +63,7 @@ public class Note {
 			}
 		}
 
-		if(numNote/12 == 1)//Si passage à l'octave supp
+		if(numNote/12 == 1)//Si passage à l'octave sup
 			{
 				numOctave++;
 				numNote %= 12;
@@ -73,23 +73,23 @@ public class Note {
 		
 
 		// Calculer le num d'octave
-		if (str.indexOf("'") != str.lastIndexOf("'")) {
+		if (chaineCaracNote.indexOf("'") != chaineCaracNote.lastIndexOf("'")) {
 			numOctave++;
 		} else {
-			if (str.indexOf("'") == -1)
+			if (chaineCaracNote.indexOf("'") == -1)
 				numOctave--;
 		}
 	}
 
-	private void trouverVariation(String str2) {
-		str2 = str2.substring(1);
+	private void trouverVariation(String strParam) {
+		strParam = strParam.substring(1);
 		var = Variation.NEUTRE;
 		//Si dièse
-		if(str2.indexOf('d')!=-1 || str2.indexOf("is")!=-1)
+		if(strParam.indexOf('d')!=-1 || strParam.indexOf("is")!=-1)
 			var = Variation.DIESE;
 		
 		//Si bémole
-		if(str2.indexOf('b')!=-1 || str2.indexOf("es")!=-1)
+		if(strParam.indexOf('b')!=-1 || strParam.indexOf("es")!=-1)
 			var = Variation.BEMOLE;
 	}
 
@@ -116,22 +116,25 @@ public class Note {
 	}
 
 	private void calculDuree() {
-		if(str.endsWith("1")){
+		if(chaineCaracNote.endsWith("1")){
 			duree = Temps.RONDE.toInt();
 		}
 		else{	//default case
 			duree = Temps.NOIRE.toInt();
 		}
-		if(str.endsWith("2")){
+		if(chaineCaracNote.endsWith("2")){
 			duree = Temps.BLANCHE.toInt();
 		}
-		if(str.endsWith("4")){
+		if(chaineCaracNote.endsWith("4")){
 			duree = Temps.NOIRE.toInt();
 		}
-		if(str.endsWith("8")){
+		if(chaineCaracNote.endsWith("6")){
+			duree = Temps.NOIREPOINTEE.toInt();
+		}
+		if(chaineCaracNote.endsWith("8")){
 			duree = Temps.CROCHE.toInt();
 		}
-		if(str.endsWith("16")){
+		if(chaineCaracNote.endsWith("16")){
 			duree = Temps.DOUBLE_CROCHE.toInt();
 		}
 	}
