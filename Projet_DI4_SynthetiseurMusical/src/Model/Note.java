@@ -60,6 +60,9 @@ public class Note {
 		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
 		if(numNote>5)
 			numNote--;
+		//Du coup on devrait peut-etre expliquer comment on arrive à ce resultat
+		//ou on ferait ça à l'oral ? 
+		
 		
 		//Prise en compte de l'altération
 		trouverVariation(chaineCaracNote);
@@ -109,7 +112,8 @@ public class Note {
 	private void calculFrequ() {
 		int diff;
 		frequence = FREQ_LA_3;
-
+		
+		//Octaves 2-3-4 pour ce projet
 		if(numOctave == 1)
 			frequence /= 4;
 		if (numOctave == 2) // Changer d'octave de fréquence
