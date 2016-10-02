@@ -24,8 +24,9 @@ public class Note {
 		calculFrequ();
 		calculDuree();
 		
-		System.out.println(hauteur.toInt());
-		System.out.println(frequence);
+		System.out.println("numNote = " + hauteur.toInt());
+		System.out.println("frequence = " + frequence);
+		System.out.println("duree = " + duree);
 	}
 
 	public double getFrequence() {
@@ -53,10 +54,20 @@ public class Note {
 		
 		if(var == Variation.DIESE)
 			numNote++;
-		if(var == Variation.BEMOLE)
+		if(var == Variation.BEMOLE){
 			numNote--;
+			if(numNote == -1)//Si passage à l'octave inf
+			{
+				numNote = 11;
+				numOctave--;
+			}
+		}
 
-		numNote %= 12;
+		if(numNote/12 == 1)//Si passage à l'octave supp
+			{
+				numOctave++;
+				numNote %= 12;
+			}
 		hauteur = Octave.getNote(numNote);// Récupérer la note
 		
 		
@@ -86,6 +97,8 @@ public class Note {
 		int diff;
 		frequence = FREQ_LA_3;
 
+		if(numOctave == 1)
+			frequence /= 4;
 		if (numOctave == 2) // Changer d'octave de fréquence
 			frequence /= 2;
 		if (numOctave == 4)
@@ -95,7 +108,7 @@ public class Note {
 
 		if (diff > 0) // aller à la bonne fréquence
 		{
-			frequence *= Math.pow(R, Math.abs(diff));
+			frequence *= Math.pow(R, Math.abs(diff));	//A REFAIRE (bug changement octave sur variation)
 		} else {
 			if (diff != 0)
 				frequence /= Math.pow(R, Math.abs(diff));

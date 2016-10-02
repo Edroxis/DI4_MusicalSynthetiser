@@ -4,7 +4,13 @@ import javax.sound.sampled.LineUnavailableException;
 
 public class test {
 	public static void main(String[] args){
-		Partition part = new Partition("none");
+		Partition part = null;
+		try {
+			part = new Partition("none");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		try {
 			GenerateurSon.jouerMelodie(part);

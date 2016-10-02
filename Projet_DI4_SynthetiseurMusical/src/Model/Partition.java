@@ -8,7 +8,7 @@ public class Partition {
 	private ArrayList<Note> notes;
 	
 	//Constructeurs
-	Partition(String nomFichier){
+	Partition(String nomFichier) throws Exception{
 		this.nomFichier = nomFichier;
 		notes = new ArrayList<Note>();
 		lectureFichier();
@@ -20,14 +20,11 @@ public class Partition {
 	}
 	
 	//Fonctions
-	public void lectureFichier(){	//prend nom de fichier
-		int i;
-		char c;
+	public void lectureFichier() throws Exception{	
+		OuvrirFichierLy fichier = new OuvrirFichierLy(nomFichier);
 		Note note;
-		//String contenuFichier = "e' g'2 a' b' b'8 c'8 b' a'2 f' d' d'8 e'8 f'";
-		String contenuFichier = "a ad ais ab aes";
 		
-		String[] noteList = contenuFichier.split(" ");
+		String[] noteList = fichier.getContenu().split(" ");
 		
 		for(String str : noteList){
 			note = new Note(str);

@@ -8,7 +8,14 @@ import javax.sound.sampled.SourceDataLine;
 public class Main {
 
 	public static void main(String[] args) throws LineUnavailableException {
-		Partition part = new Partition("noFile");
+		Partition part = null;
+		try {
+			part = new Partition("greensleeves.txt");
+			//part = new Partition("test.txt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		GenerateurSon.jouerMelodie(part);
 	}
