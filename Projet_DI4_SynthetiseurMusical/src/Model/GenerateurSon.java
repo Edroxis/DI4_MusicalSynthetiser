@@ -21,8 +21,16 @@ public class GenerateurSon {
 		ArrayList<Note> noteList = part.getNotes();
 		
 		for(Note n : noteList){
-			byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
-			int count = line.write(output, 0, output.length);
+			if(n.getHauteur() == Octave.NONE)
+				try {
+					Thread.sleep(n.getDuree());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			else{
+				byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
+				int count = line.write(output, 0, output.length);
+			}
 		}
 		
 		line.drain();

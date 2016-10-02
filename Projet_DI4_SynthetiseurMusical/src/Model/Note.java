@@ -21,7 +21,8 @@ public class Note {
 	// Methodes
 	private void construireNote() {
 		analyserChaine();
-		calculFrequ();
+		if(hauteur != Octave.NONE)
+			calculFrequ();
 		calculDuree();
 		
 		System.out.println("numNote = " + hauteur.toInt());
@@ -36,13 +37,24 @@ public class Note {
 	public int getDuree() {
 		return duree;
 	}
+	
+	public Octave getHauteur(){
+		return hauteur;
+	}
 
 	// Analyseur de chaines
-	private void analyserChaine() {
+	private int analyserChaine() {
 		char firstLetter;
 		int numNote;
 		chaineCaracNote.toLowerCase();
 		firstLetter = chaineCaracNote.charAt(0);
+		//System.out.println(firstLetter);
+		if(firstLetter == 'n'){
+			numNote = 12;
+			frequence = 1;
+			hauteur = Octave.NONE;
+			return 0;
+		}
 		
 		// trouver l'index de la note de l'enum Octave (sans altération)
 		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
@@ -79,6 +91,7 @@ public class Note {
 			if (chaineCaracNote.indexOf("'") == -1)
 				numOctave--;
 		}
+		return 0;
 	}
 
 	private void trouverVariation(String strParam) {
