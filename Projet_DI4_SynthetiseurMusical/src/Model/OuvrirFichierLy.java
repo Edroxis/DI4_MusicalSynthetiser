@@ -1,3 +1,5 @@
+/*Source: http://www.commentcamarche.net/forum/affich-590149-lire-un-fichier-texte-en-java*/
+
 package Model;
 
 import java.io.BufferedReader;
