@@ -101,18 +101,17 @@ Dans un premier temps, nous avons eu un peu de mal à nous représenter comment 
 
 Ensuite, nous avons commencé à rechercher des librairies que nous pouvions utiliser pour traiter le son, et ce dans plusieurs langages : Java et C/C++, ces trois langages étant ceux que nous avons étudié en 3ème année. 
 
-Pour le C et le C++, nous avons trouvé 2 librairies assez importantes, OpenALl (\url{https://www.openal.org/documentation/openal-1.1-specification.pdf}) et FMOD (\url{http://www.fmod.org/documentation/}
+Pour le C et le C++, nous avons trouvé 2 librairies assez importantes, OpenALl et FMOD.
 
-OpenAL
-
-Pour Java, nous avons trouvé une librairie permettant de gérer les sons assez facilement : Java Sound API, \url{http://docs.oracle.com/javase/7/docs/technotes/guides/sound/programmer_guide/contents.html}
+Pour Java, nous avons trouvé une librairie permettant de gérer les sons assez facilement, l'API Java Sound.
 
 Pendant nos recherches, puis parallèlement à la rédaction de cette première version du code, nous avons également commencé à réfléchir comment traiter la polyphonie avec cette application. Nous avons eu l'idée d'utiliser des Threads afin de traiter plusieurs tâches et donc lire plusieurs voix à la fois. La question que nous avons dû nous poser était la suivante : les Threads permettent-ils une lecture synchronisée des différentes voix ? Nous avons alors effectué quelques tests, et nous en avons déduits que nous pouvions totalement utiliser les Threads pour de la polyphonie. Nous adapterons notre code plus tard, il ne s'agit pas d'une fonctionnalité requise pour notre première version, il s'agissait plutôt de savoir si nous devions faire d'autres recherches ou si nous allions pouvoir utiliser les Threads dans le code.
 
-\subsection{Langage de programmation} 
+\subsection{Choix des librairies et outils} 
 
-Après ces recherches, notre choix s'est porté sur le langage Java. Nous nous sentions plus à l'aise par l'utilisation de ce langage. De plus, la librairie Java Sound correspond exactement à ce que nous avions besoin pour ce projet. Le fait que nous ayons trouvé une partie de code permettant de générer une sinusoïde pendant nos recherches, que nous pouvions ensuite réutiliser et adapter pour intégrer dans notre propre code nous assurait un gain de temps conséquent et ainsi de pouvoir se concentrer sur des fonctionnalités plus avancées de l'application.
+En faisant nos recherches nous avons testé plusieurs librairies. Nous avons réussi à prendre en main l'API java assez vite pour l'utilisation que nous voulions en faire, nous nous sommes donc arrêtés dessus, et elle correspondait à ce dont nous avions besoin. Le fait que nous ayons trouvé une partie de code permettant de générer une sinusoïde pendant nos recherches, que nous pouvions ensuite réutiliser et adapter pour intégrer dans notre propre code nous assurait un gain de temps conséquent et ainsi de pouvoir se concentrer sur des fonctionnalités plus avancées de l'application.
 
+Et donc, par conséquent, nous avons choisi de réaliser notre programme en Java.
 
 \section{Définition des classes}
 
@@ -148,7 +147,7 @@ Attributs :
 \begin{itemize}
 \item Fréquence de la note La (octave 3) a partir de laquelle toutes les autres notes sont calculées
 \item R, le coefficient de la gamme pythagoricienne, multiplier la fréquence d'une note par cette constante la fait monter d'un demi ton, la diviser par la même constante la fait descendre. Sa valeur exacte est racine douzième de 2, on prends ici une valeur approchée.
-\item La chaîne de caractère caractéristique de la note (cf notation lylipond)
+\item La chaîne de caractère caractéristique de la note (cf notation Lilypond)
 \item La fréquence de la note (en Hz)
 \item La durée de la note (en ms)
 \item La hauteur (do, ré, mi, mi\# etc...)
@@ -242,6 +241,9 @@ Voici une petite liste d'url intéressantes au sujet de ce projet :
 
 \begin{itemize}
 \item \url{www.polytech.univ-tours.fr}
+\item \url{http://docs.oracle.com/javase/7/docs/technotes/guides/sound/programmer_guide/contents.html}
+\item \url{https://www.openal.org/documentation/openal-1.1-specification.pdf}
+\item \url{http://www.fmod.org/documentation/
 \end{itemize}
 %--------------------------------------------------------------------------------
 %index : attention, le fichier dindex .ind doit avoir le même nom que le fichier .tex

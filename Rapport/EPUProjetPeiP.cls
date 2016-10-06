@@ -225,7 +225,7 @@
 \AtEndDocument{\chaptermark{}
   %\enlargethispage{2cm}
 \sectionmark{}\textsf{\small \vfill\begin{center}
-Ce document a {\'e}t{\'e} format{\'e} selon le format EPUProjetPeiP.cls (N. Monmarch{\'e})\\~\\
+%Ce document a {\'e}t{\'e} format{\'e} selon le format EPUProjetPeiP.cls (N. Monmarch{\'e})\\~\\
 {\'E}cole Polytechnique de l'Universit\'e de Tours\\
 64 Avenue Jean Portalis, 37200 Tours, France\\
 \url{http://www.polytech.univ-tours.fr}
@@ -374,7 +374,7 @@ Ce document a {\'e}t{\'e} format{\'e} selon le format EPUProjetPeiP.cls (N. Monm
     \let \footnote \thanks
     {     
      \noindent\begin{minipage}[h]{8cm}%
-     \includegraphics[height=2.4cm]{Logo_PeiP_v2009_RGB_3cm_300dpi}%
+     %\includegraphics[height=2.4cm]{Logo_PeiP_v2009_RGB_3cm_300dpi}%
      \includegraphics[height=2.4cm]{logo_Polytech_Tours_RVB_3cm_300dpi}%
      \end{minipage}
      \hfill
