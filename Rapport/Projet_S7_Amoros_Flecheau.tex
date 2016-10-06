@@ -8,6 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{hyperref}
+\usepackage{caption} 
 
 \makeindex
 
@@ -41,13 +42,12 @@ Département DI\\~ %
 
 \tableofcontents
 
-%\listoffigures
+\listoffigures
 %rq1 : si vous n'avez pratiquement pas de figures, laissez la ligne précédente en commentaire
 
 %\listoftables
 %rq1 : si vous n'avez pratiquement pas de tables, laissez la ligne précédente en commentaire
 }
-
 
 \start
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,6 +115,9 @@ Et donc, par conséquent, nous avons choisi de réaliser notre programme en Java
 
 \section{Définition des classes}
 
+\includegraphics[scale=0.4]{Class_Diagram_MusicalSynth.jpg}
+\captionof{figure}{Diagramme de classe première version}
+\label{fig1}
 \subsection{Classe Partition}
 
 Le but de cette classe est de décrire la structure de partition.
@@ -243,7 +246,7 @@ Voici une petite liste d'url intéressantes au sujet de ce projet :
 \item \url{www.polytech.univ-tours.fr}
 \item \url{http://docs.oracle.com/javase/7/docs/technotes/guides/sound/programmer_guide/contents.html}
 \item \url{https://www.openal.org/documentation/openal-1.1-specification.pdf}
-\item \url{http://www.fmod.org/documentation/
+\item \url{http://www.fmod.org/documentation/}
 \end{itemize}
 %--------------------------------------------------------------------------------
 %index : attention, le fichier dindex .ind doit avoir le même nom que le fichier .tex
