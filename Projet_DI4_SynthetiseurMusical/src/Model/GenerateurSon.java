@@ -9,29 +9,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 public class GenerateurSon {
-	protected static final int SAMPLE_RATE = 128 * 1024;
+	protected static final int SAMPLE_RATE = 192 * 1024;
 	private int TEMPO = 120; //Nb de noires par min
 	
 	public static void jouerMelodie(Partition part) throws LineUnavailableException {
 		final AudioFormat af = new AudioFormat(GenerateurSon.SAMPLE_RATE, 8, 1, true, true);
 		SourceDataLine line = AudioSystem.getSourceDataLine(af);
+
 		line.open(af, GenerateurSon.SAMPLE_RATE);
 		line.start();
 		
-		ArrayList<Note> noteList = part.getNotes();
+		byte[] output = part.getTabSon();
 		
-		for(Note n : noteList){
-			if(n.getHauteur() == Octave.NONE)
-				try {
-					Thread.sleep(n.getDuree());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			else{
-				byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
-				int count = line.write(output, 0, output.length);
-			}
-		}
+		line.write(output, 0, output.length);
 		
 		line.drain();
 		line.close();
@@ -45,6 +35,8 @@ public class GenerateurSon {
 		for (int i = 0; i < output.length; i++) {
 			double angle = 2.0 * Math.PI * i / period;
 			output[i] = (byte) (Math.sin(angle) * 127f);
+			if(freq == 1) //si on lit un silence
+				output[i] = 0;
 		}
 		return output;
 	}

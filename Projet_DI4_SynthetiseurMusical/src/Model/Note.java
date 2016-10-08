@@ -89,6 +89,7 @@ public class Note {
 		
 
 		// Calculer le num d'octave
+<<<<<<< Upstream, based on origin/master
 		//Compte le nombre d'occurence de ' et de ,
 		int countUp = chaineCaracNote.length() - chaineCaracNote.replace("'", "").length();
 		octaveBase += countUp;
@@ -96,6 +97,11 @@ public class Note {
 		octaveBase -= countDown;
 		
 		numOctave = octaveBase;
+=======
+		//Compte le nombre d'occurence de '
+		int count = chaineCaracNote.length() - chaineCaracNote.replace("'", "").length();
+		numOctave = 2 + count;
+>>>>>>> d0b84d7 feature mixage et polyphonie
 		
 		return 0;
 	}
@@ -116,6 +122,7 @@ public class Note {
 		int diff;
 		frequence = FREQ_LA_3;
 		
+<<<<<<< Upstream, based on origin/master
 		//Octaves 1 à 5 pour ce projet
 		switch(numOctave){
 		case 1 : frequence /= 4;
@@ -128,6 +135,17 @@ public class Note {
 		case 5 : frequence *= 4;
 			break;
 		}
+=======
+		//Octaves 2-3-4 pour ce projet
+		if(numOctave == 1)
+			frequence /= 4;
+		if (numOctave == 2) // Changer d'octave de fréquence
+			frequence /= 2;
+		if (numOctave == 4)
+			frequence *= 2;
+		if (numOctave == 5)
+			frequence *= 4;
+>>>>>>> d0b84d7 feature mixage et polyphonie
 
 		diff = hauteur.toInt() - Octave.LA.toInt();
 
