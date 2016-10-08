@@ -26,9 +26,9 @@ public class Note {
 			calculFrequ();
 		calculDuree();
 		
-		System.out.println("numNote = " + hauteur.toInt());
+		/*System.out.println("numNote = " + hauteur.toInt());
 		System.out.println("frequence = " + frequence);
-		System.out.println("duree = " + duree);
+		System.out.println("duree = " + duree);*/
 	}
 
 	public double getFrequence() {
