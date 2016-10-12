@@ -3,6 +3,8 @@ package Model;
 public class Note {
 	public static final double FREQ_LA_3 = 440;	// fréquences du LA3 ou LA440
 	public static final double R = 1.05946;
+	private static int octaveBase = 3;
+	private static Temps dureeBase = Temps.NOIRE;
 
 	private String chaineCaracNote;	// la chaine avec les caractéristiques de la note
 	private double frequence;
@@ -14,7 +16,6 @@ public class Note {
 	// Constructeur
 	public Note(String str) {
 		this.chaineCaracNote = str;
-		numOctave = 3;
 		construireNote();
 	}
 
@@ -88,12 +89,14 @@ public class Note {
 		
 
 		// Calculer le num d'octave
-		if (chaineCaracNote.indexOf("'") != chaineCaracNote.lastIndexOf("'")) {
-			numOctave++;
-		} else {
-			if (chaineCaracNote.indexOf("'") == -1)
-				numOctave--;
-		}
+		//Compte le nombre d'occurence de ' et de ,
+		int countUp = chaineCaracNote.length() - chaineCaracNote.replace("'", "").length();
+		octaveBase += countUp;
+		int countDown = chaineCaracNote.length() - chaineCaracNote.replace(",", "").length();
+		octaveBase -= countDown;
+		
+		numOctave = octaveBase;
+		
 		return 0;
 	}
 
@@ -113,13 +116,18 @@ public class Note {
 		int diff;
 		frequence = FREQ_LA_3;
 		
-		//Octaves 2-3-4 pour ce projet
-		if(numOctave == 1)
-			frequence /= 4;
-		if (numOctave == 2) // Changer d'octave de fréquence
-			frequence /= 2;
-		if (numOctave == 4)
-			frequence *= 2;
+		//Octaves 1 à 5 pour ce projet
+		switch(numOctave){
+		case 1 : frequence /= 4;
+			break;
+		case 2 : frequence /= 2;
+			break;
+		case 3 : break;
+		case 4 : frequence *= 2;
+			break;
+		case 5 : frequence *= 4;
+			break;
+		}
 
 		diff = hauteur.toInt() - Octave.LA.toInt();
 
@@ -134,25 +142,24 @@ public class Note {
 
 	private void calculDuree() {
 		if(chaineCaracNote.endsWith("1")){
-			duree = Temps.RONDE.toInt();
-		}
-		else{	//default case
-			duree = Temps.NOIRE.toInt();
+			dureeBase = Temps.RONDE;
 		}
 		if(chaineCaracNote.endsWith("2")){
-			duree = Temps.BLANCHE.toInt();
+			dureeBase = Temps.BLANCHE;
 		}
 		if(chaineCaracNote.endsWith("4")){
-			duree = Temps.NOIRE.toInt();
+			dureeBase = Temps.NOIRE;
 		}
 		if(chaineCaracNote.endsWith("6")){
-			duree = Temps.NOIREPOINTEE.toInt();
+			dureeBase = Temps.NOIREPOINTEE;
 		}
 		if(chaineCaracNote.endsWith("8")){
-			duree = Temps.CROCHE.toInt();
+			dureeBase = Temps.CROCHE;
 		}
 		if(chaineCaracNote.endsWith("16")){
-			duree = Temps.DOUBLE_CROCHE.toInt();
+			dureeBase = Temps.DOUBLE_CROCHE;
 		}
+		
+		duree = dureeBase.toInt();
 	}
 }

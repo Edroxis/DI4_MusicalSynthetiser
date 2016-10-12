@@ -14,6 +14,7 @@ public class OuvrirFichierLy {
 
 	OuvrirFichierLy(String nomFichier) throws Exception {
 		this.nomFichier = nomFichier;
+		contenuFichier = "";
 		contenuFichier = extraireContenu();
 	}
 
@@ -36,6 +37,7 @@ public class OuvrirFichierLy {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		contenuFichier = contenuFichier.substring(0, contenuFichier.length()-1);
 		return contenuFichier;
 	}
 }
