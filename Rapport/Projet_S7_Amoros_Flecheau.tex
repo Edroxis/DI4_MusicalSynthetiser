@@ -63,19 +63,19 @@ Ce sujet nous a assez vite séduit étant donné qu'il concernait la musique, un
 Suite à notre rencontre avec notre encadrant, nous avons décidé de réaliser notre projet en suivant la méthode "Agile". Elle consiste à faire une première version du projet, de la présenter à notre client, puis de voir quelles fonctionnalités supplémentaires peuvent être implémentées dans un laps de temps donné, puis de reprendre rendez-vous avec le client, et de recommencer jusqu'à obtenir une version finale de l'application.
 
 
-\chapter{Première version du projet}
+\chapter{Itération 1}
 
 \section{Recherche et première approche}
 
 \subsection{Définition des besoins/Spécification}
 
-Le but de ce projet est, dans un premier temps, de pouvoir créer une musique à partir d'un fichier texte avec une syntaxe similaire à celle utilisée avec Lilypond, 
-c'est à dire de la forme suivante : "a2 a a b4 c" par exemple.
+Le but de ce projet est dans un premier temps, de pouvoir créer une musique à partir d'un fichier texte avec une syntaxe similaire à celle utilisée avec Lilypond, c'est à dire de la forme suivante : "a2 a a b4 c" par exemple. Nous vous renvoyons à la
+\href{http://lilypond.org/text-input.html}{documentation Lilypond} pour plus de détails.
 Avec cette notation : 
 \begin{itemize}
 \item "a" correspond à la note "la"
 \item " b" correspond à "si"
-\item  "c" à "do"
+\item  "c" à "do",
 \item "d" à "ré"
 \item "e" à "mi"
 \item "f" à "fa"
@@ -97,15 +97,13 @@ Dans la finalité de ce projet, nous aimerions également pouvoir générer un f
 Pour ce projet, nous avions le choix du langage de programmation, tout en restant de préférence sur un langage assez basique. Afin 
 d'orienter ce choix, nous avons commencé par une phase de recherche.
 
-Dans un premier temps, nous avons eu un peu de mal à nous représenter comment réussir à émettre un signal sonore à partir d'un fichier texte. Nous avons donc regardé les fréquences correspondant aux différentes notes des octaves afin d'avoir une idée un peu plus claire d'un algorithme. Nous avons également été voir la documentation et testé Lilypond. Il s'agit d'une application permettant de créer, de la même façon que notre projet, à partir d'un fichier texte,  une partition lisible par n'importe quel musicien, un LaTeX pour la musique. En poursuivant avec Lilypound, nous avons trouvé un éditeur correspondant au format de Lilypond : Frescobaldi. Il contient également un lecteur pour les partitions ainsi créées.
+Dans un premier temps, nous avons eu un peu de mal à nous représenter comment réussir à émettre un signal sonore à partir d'un fichier texte. Nous avons donc regardé les fréquences correspondant aux différentes notes des octaves afin d'avoir une idée un peu plus claire d'un algorithme. Nous avons également consulté la documentation et testé Lilypond. Il s'agit d'une application permettant de créer, de la même façon que notre projet, à partir d'un fichier texte,  une partition lisible par n'importe quel musicien, un LaTeX pour la musique. En poursuivant avec Lilypond, nous avons trouvé un éditeur correspondant au format de Lilypond : Frescobaldi. Il contient également un lecteur pour les partitions ainsi créées.
 
 Ensuite, nous avons commencé à rechercher des librairies que nous pouvions utiliser pour traiter le son, et ce dans plusieurs langages : Java et C/C++, ces trois langages étant ceux que nous avons étudié en 3ème année. 
 
 Pour le C et le C++, nous avons trouvé 2 librairies assez importantes, OpenALl et FMOD.
 
 Pour Java, nous avons trouvé une librairie permettant de gérer les sons assez facilement, l'API Java Sound.
-
-Pendant nos recherches, puis parallèlement à la rédaction de cette première version du code, nous avons également commencé à réfléchir comment traiter la polyphonie avec cette application. Nous avons eu l'idée d'utiliser des Threads afin de traiter plusieurs tâches et donc lire plusieurs voix à la fois. La question que nous avons dû nous poser était la suivante : les Threads permettent-ils une lecture synchronisée des différentes voix ? Nous avons alors effectué quelques tests, et nous en avons déduits que nous pouvions totalement utiliser les Threads pour de la polyphonie. Nous adapterons notre code plus tard, il ne s'agit pas d'une fonctionnalité requise pour notre première version, il s'agissait plutôt de savoir si nous devions faire d'autres recherches ou si nous allions pouvoir utiliser les Threads dans le code.
 
 \subsection{Choix des librairies et outils} 
 
@@ -181,7 +179,7 @@ Attributs :
 \item Le tempo (nombre de noires par minutes)
 \end{itemize}
 
-Methodes :
+Méthodes :
 \begin{itemize}
 \item jouerMelodie(Partition part) initialise les structure de l'API java.Sound, puis parcours le tableau de notes de la partition en paramètre de la partition pour générer l'onde correspondante et la jouer sur la sortie standard, enfin, la méthode ferme le flux de sortie.
 \item createSinWaveBuffer(double freq, int ms) crée un tableau de byte qui caractérise l'onde de fréquence passée en paramètre.
@@ -213,6 +211,12 @@ Méthodes :
 \item extraireContenu() permet de lire le fichier texte et de stocker le résultat dans l'attribut coresspondant.
 \end{itemize}
 
+\section{Perspectives pour la suite}
+
+Pendant nos recherches, puis parallèlement à la rédaction de cette première version du code, nous avons également commencé à réfléchir à la façon de traiter la polyphonie avec cette application. Nous avons eu l'idée d'utiliser des Threads afin de traiter plusieurs tâches et donc lire plusieurs voix à la fois. La question que nous avons dû nous poser était la suivante : les Threads permettent-ils une lecture synchronisée des différentes voix ? Nous avons alors effectué quelques tests, et nous en avons déduits que nous pouvions totalement utiliser les Threads pour de la polyphonie. Nous adapterons notre code plus tard, il ne s'agit pas d'une fonctionnalité requise pour notre première version, il s'agissait plutôt de savoir si nous devions faire d'autres recherches ou si nous allions pouvoir utiliser les Threads dans le code.
+
+\chapter{Itération 2}
+
 %--------------------------------------------------------------------------------
 %\chapter*{Conclusion}
 %\addcontentsline{toc}{chapter}{\numberline{}Conclusion}
@@ -223,6 +227,8 @@ Méthodes :
 %--------------------------------------------------------------------------------
 %exemple de bibliographie
 \begin{thebibliography}{99}
+\item \url{http://www.commentcamarche.net/forum/affich-590149-lire-un-fichier-texte-en-java}
+\item \url{http://stackoverflow.com/questions/8632104/sine-wave-sound-generator-in-java}
 \label{sec:biblio}
 \end{thebibliography}
 
@@ -239,6 +245,8 @@ Voici une petite liste d'url intéressantes au sujet de ce projet :
 
 \begin{itemize}
 \item \url{www.polytech.univ-tours.fr}
+\item Syntaxe Lilypond : \url{http://lilypond.org/text-input.html}
+\item Documentation complète Lilypond : \url{http://lilypond.org/doc/v2.18/Documentation/learning.pdf}
 \item \url{http://docs.oracle.com/javase/7/docs/technotes/guides/sound/programmer_guide/contents.html}
 \item \url{https://www.openal.org/documentation/openal-1.1-specification.pdf}
 \item \url{http://www.fmod.org/documentation/}

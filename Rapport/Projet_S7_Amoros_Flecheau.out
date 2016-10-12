@@ -1,5 +1,5 @@
 \BOOKMARK [0][-]{chapter*.3}{Introduction}{}% 1
-\BOOKMARK [0][-]{chapter.1}{Premi\350re version du projet}{}% 2
+\BOOKMARK [0][-]{chapter.1}{It\351ration 1}{}% 2
 \BOOKMARK [1][-]{section.1.1}{Recherche et premi\350re approche}{chapter.1}% 3
 \BOOKMARK [2][-]{subsection.1.1.1}{D\351finition des besoins/Sp\351cification}{section.1.1}% 4
 \BOOKMARK [2][-]{subsection.1.1.2}{Recherches}{section.1.1}% 5
@@ -9,5 +9,7 @@
 \BOOKMARK [2][-]{subsection.1.2.2}{Classe Notes}{section.1.2}% 9
 \BOOKMARK [2][-]{subsection.1.2.3}{Classe GenerateurSon}{section.1.2}% 10
 \BOOKMARK [2][-]{subsection.1.2.4}{OuvrirFichierLy}{section.1.2}% 11
-\BOOKMARK [-1][-]{chapter*.4}{Annexes}{}% 12
-\BOOKMARK [0][-]{appendix.A}{Liens utiles}{chapter*.4}% 13
+\BOOKMARK [1][-]{section.1.3}{Perspectives pour la suite}{chapter.1}% 12
+\BOOKMARK [0][-]{chapter.2}{It\351ration 2}{}% 13
+\BOOKMARK [-1][-]{Item.2}{Annexes}{}% 14
+\BOOKMARK [0][-]{appendix.A}{Liens utiles}{Item.2}% 15
