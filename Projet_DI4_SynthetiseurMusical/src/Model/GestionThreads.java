@@ -22,13 +22,11 @@ public class GestionThreads extends Thread{
 		try {
 			line = AudioSystem.getSourceDataLine(af);
 		} catch (LineUnavailableException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			line.open(af, GenerateurSon.SAMPLE_RATE);
 		} catch (LineUnavailableException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		line.start();
@@ -36,16 +34,8 @@ public class GestionThreads extends Thread{
 		ArrayList<Note> noteList = part.getNotes();
 		
 		for(Note n : noteList){
-			/*if(n.getHauteur() == Octave.NONE)
-				try {
-					Thread.sleep(n.getDuree());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			else{*/
 				byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
 				line.write(output, 0, output.length);
-			/*}*/
 		}
 		
 		line.drain();
