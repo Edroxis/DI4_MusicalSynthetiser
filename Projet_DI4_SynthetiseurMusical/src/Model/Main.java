@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
@@ -15,9 +17,15 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		byte[] tabSon = GenerateurSon.createSinWaveBuffer(1000, 1000);
 		
+		try {
+			CreationFichierAudio.saveWAV(tabSon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		GenerateurSon.jouerMelodie(part);
+		//GenerateurSon.jouerMelodie(part);
 	}
 
 }
