@@ -36,16 +36,16 @@ public class GestionThreads extends Thread{
 		ArrayList<Note> noteList = part.getNotes();
 		
 		for(Note n : noteList){
-			if(n.getHauteur() == Octave.NONE)
+			/*if(n.getHauteur() == Octave.NONE)
 				try {
 					Thread.sleep(n.getDuree());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			else{
+			else{*/
 				byte[] output = createSinWaveBuffer(n.getFrequence(), n.getDuree());
 				line.write(output, 0, output.length);
-			}
+			/*}*/
 		}
 		
 		line.drain();
