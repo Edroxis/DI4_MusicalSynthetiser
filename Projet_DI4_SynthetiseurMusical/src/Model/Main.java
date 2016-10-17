@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Scanner;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
@@ -13,15 +15,12 @@ public class Main {
 		try {
 			part1 = new Partition("greensleeves.txt");
 			part2 = new Partition("greensleevesV2.txt");
-			//part = new Partition("test.txt");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		GestionThreads t1 = new GestionThreads(part1);
-		GestionThreads t2 = new GestionThreads(part2);
-		t1.start();
-		t2.start();
-		/*GenerateurSon.jouerMelodie(part);*/
+		
+		//Lancement des Threads
+		new GestionThreads(part1).start();
+		new GestionThreads(part2).start();
 	}
-
 }
