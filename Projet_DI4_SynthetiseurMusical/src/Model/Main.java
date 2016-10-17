@@ -12,6 +12,7 @@ public class Main {
 		part2 = new Partition("greensleevesV2.txt");
 		
 		byte[] tabSon = ManipulationSon.mixer(part1.getTabSon(), part2.getTabSon());
+
 		try {
 			CreationFichierAudio.saveWAV(tabSon);
 		} catch (IOException e) {

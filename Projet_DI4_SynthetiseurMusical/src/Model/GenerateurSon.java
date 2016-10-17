@@ -9,7 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 public class GenerateurSon {
-	protected static final int SAMPLE_RATE = 192 * 1024;
+	protected static final int SAMPLE_RATE = 128 * 1024;
 	private int TEMPO = 120; //Nb de noires par min
 	
 	public static void jouerMelodie(Partition part) throws LineUnavailableException {
