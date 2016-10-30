@@ -2,14 +2,14 @@ package Model;
 
 import java.util.ArrayList;;
 
-public class Partition {
+public class Voix {
 	
 	private String nomFichier;
 	private byte[] tabSon;
 	private ArrayList<Note> notes;
 	
 	//Constructeurs
-	Partition(String nomFichier){
+	Voix(String nomFichier){
 		double i = 0;
 		this.nomFichier = nomFichier;
 		notes = new ArrayList<Note>();
@@ -27,7 +27,7 @@ public class Partition {
 		construireSon();
 	}
 	
-	Partition(byte[] tab){
+	Voix(byte[] tab){
 		notes = new ArrayList<Note>();
 		tabSon = tab;
 	}

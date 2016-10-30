@@ -12,7 +12,7 @@ public class GenerateurSon {
 	protected static final int SAMPLE_RATE = 128 * 1024;
 	private int TEMPO = 120; //Nb de noires par min
 	
-	public static void jouerMelodie(Partition part) throws LineUnavailableException {
+	public static void jouerMelodie(Voix part) throws LineUnavailableException {
 		final AudioFormat af = new AudioFormat(GenerateurSon.SAMPLE_RATE, 8, 1, true, true);
 		SourceDataLine line = AudioSystem.getSourceDataLine(af);
 
