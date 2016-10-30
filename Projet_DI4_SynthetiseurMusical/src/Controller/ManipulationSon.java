@@ -1,4 +1,4 @@
-package Model;
+package Controller;
 
 public class ManipulationSon {
 	public static byte[] mixer(byte[] t1, byte[] t2){

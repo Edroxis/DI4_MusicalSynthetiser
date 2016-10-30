@@ -1,6 +1,9 @@
 package Model;
 
-import java.util.ArrayList;;
+import java.util.ArrayList;
+
+import Controller.GenerateurSon;
+import Controller.OuvrirFichierLy;;
 
 public class Voix {
 	
@@ -9,7 +12,7 @@ public class Voix {
 	private ArrayList<Note> notes;
 	
 	//Constructeurs
-	Voix(String nomFichier){
+	public Voix(String nomFichier){
 		double i = 0;
 		this.nomFichier = nomFichier;
 		notes = new ArrayList<Note>();
@@ -20,14 +23,14 @@ public class Voix {
 		//Créer tabSon de la bonne taille
 		for(Note n : notes)
 			i += n.getDuree();
-		int samples = (int) (i * GenerateurSon.SAMPLE_RATE / 1000);
+		int samples = (int) (i * GenerateurSon.getSampleRate() / 1000);
 		tabSon = new byte[samples];
 		
 		//Remplis tableau d'octets décrivant le son
 		construireSon();
 	}
 	
-	Voix(byte[] tab){
+	public Voix(byte[] tab){
 		notes = new ArrayList<Note>();
 		tabSon = tab;
 	}

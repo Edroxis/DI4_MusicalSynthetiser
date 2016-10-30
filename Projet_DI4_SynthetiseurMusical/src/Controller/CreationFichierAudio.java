@@ -1,6 +1,6 @@
 /* source: https://forum.processing.org/two/discussion/4339/how-to-save-a-wav-file-using-audiosystem-and-audioinputstream-of-javasound */
 
-package Model;
+package Controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

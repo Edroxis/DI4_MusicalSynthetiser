@@ -1,8 +1,12 @@
-package Model;
+package Main;
 
 import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
+
+import Controller.CreationFichierAudio;
+import Controller.ManipulationSon;
+import Model.Voix;
 
 public class Main {
 

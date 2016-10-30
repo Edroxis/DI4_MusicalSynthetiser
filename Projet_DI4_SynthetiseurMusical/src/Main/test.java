@@ -1,30 +1,11 @@
-package Model;
-
-/*import javax.sound.sampled.LineUnavailableException;
-
-public class test {
-	public static void main(String[] args){
-		Partition part = null;
-		try {
-			part = new Partition("none");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			GenerateurSon.jouerMelodie(part);
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
-	}
-}
-*/
+package Main;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+
+import Controller.GenerateurSon;
 
 public class test {
 	static int SAMPLE_RATE = 64 * 1024;
@@ -80,10 +61,10 @@ public class test {
           
           son3 = createSinWaveBuffer(450, 1000);
           
-          final AudioFormat af = new AudioFormat(GenerateurSon.SAMPLE_RATE, 8, 1, true, true);
+          final AudioFormat af = new AudioFormat(GenerateurSon.getSampleRate(), 8, 1, true, true);
   		  SourceDataLine line = AudioSystem.getSourceDataLine(af);
 
-  		  line.open(af, GenerateurSon.SAMPLE_RATE);
+  		  line.open(af, GenerateurSon.getSampleRate());
   		  line.start();
   		  
   		  line.write(sonMixe, 0, sonMixe.length);

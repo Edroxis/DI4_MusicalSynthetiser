@@ -1,6 +1,6 @@
 /*Source: http://www.commentcamarche.net/forum/affich-590149-lire-un-fichier-texte-en-java*/
 
-package Model;
+package Controller;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ public class OuvrirFichierLy {
 	private String nomFichier;
 	private String contenuFichier;
 
-	OuvrirFichierLy(String nomFichier) throws Exception {
+	public OuvrirFichierLy(String nomFichier) throws Exception {
 		this.nomFichier = nomFichier;
 		contenuFichier = "";
 		contenuFichier = extraireContenu();
