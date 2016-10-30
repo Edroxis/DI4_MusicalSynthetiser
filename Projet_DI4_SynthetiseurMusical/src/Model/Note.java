@@ -160,6 +160,6 @@ public class Note{
 			dureeBase = Temps.DOUBLE_CROCHE;
 		}
 		
-		duree = dureeBase.toInt();
+		duree = (int) (dureeBase.getFrac() * Partition.getDureeNoire());
 	}
 }

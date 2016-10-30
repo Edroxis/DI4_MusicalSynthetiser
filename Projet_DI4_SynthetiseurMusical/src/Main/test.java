@@ -34,7 +34,6 @@ public class test {
 		try {
 			GenerateurSon.jouerMelodie(part);
 		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

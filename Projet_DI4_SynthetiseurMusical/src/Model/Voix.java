@@ -10,6 +10,7 @@ public class Voix extends Playable{
 	
 	//Constructeurs
 	public Voix(String contenu){
+		super();
 		double i = 0;
 		this.contenu = contenu;
 		notes = new ArrayList<Note>();

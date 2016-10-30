@@ -1,14 +1,14 @@
 package Model;
 
 public enum Temps {
-	RONDE(4000), BLANCHE(2000), NOIRE(1000), NOIREPOINTEE(1500), CROCHE(500), DOUBLE_CROCHE(250);
-	private final int duree;
+	RONDE(4), BLANCHE(2), NOIRE(1), NOIREPOINTEE(1.5), CROCHE(0.5), DOUBLE_CROCHE(0.25);
+	private double frac;
 	
-	private Temps(int duree) {
-		this.duree = duree;
+	private Temps(double frac) {
+		this.frac = frac;
 	}
 	
-	public int toInt() {
-		return duree;
+	public double getFrac() {
+		return frac;
 	}
 }

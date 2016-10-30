@@ -1,14 +1,14 @@
 package Model;
 
 import java.util.ArrayList;
-import Controller.FichierLy;
-import Controller.GenerateurSon;
-import Controller.ManipulationSon;
+import Controller.*;
 
 public class Partition extends Playable{
 	//Attribut
 	private ArrayList<Voix> voix;
 	private String contenu;
+	private static int TEMPO = 80;//nombre de noires par minutes
+	private static int dureeNoire = 750;//durée d'une noire en ms
 	
 	//Constructeur
 	public Partition(FichierLy fichier){
@@ -43,5 +43,14 @@ public class Partition extends Playable{
 	
 	public byte[] getTabSon(){
 		return super.getTabSon();
+	}
+	
+	public void setTempo(int tempo){
+		TEMPO = tempo;
+		dureeNoire = (60 * 1000) /TEMPO;
+	}
+	
+	public static int getDureeNoire(){
+		return dureeNoire;
 	}
 }
