@@ -3,36 +3,28 @@ package Model;
 import java.util.ArrayList;
 
 import Controller.GenerateurSon;
-import Controller.OuvrirFichierLy;;
 
-public class Voix {
-	
-	private String nomFichier;
-	private byte[] tabSon;
+public class Voix extends Playable{
 	private ArrayList<Note> notes;
+	private String contenu;
 	
 	//Constructeurs
-	public Voix(String nomFichier){
+	public Voix(String contenu){
 		double i = 0;
-		this.nomFichier = nomFichier;
+		this.contenu = contenu;
 		notes = new ArrayList<Note>();
 		
 		//Lancer lecture des notes
-		lectureFichier();
+		analyseStr();
 		
 		//Créer tabSon de la bonne taille
 		for(Note n : notes)
 			i += n.getDuree();
 		int samples = (int) (i * GenerateurSon.getSampleRate() / 1000);
-		tabSon = new byte[samples];
+		super.setTabSon(new byte[samples]);
 		
 		//Remplis tableau d'octets décrivant le son
 		construireSon();
-	}
-	
-	public Voix(byte[] tab){
-		notes = new ArrayList<Note>();
-		tabSon = tab;
 	}
 
 	//Accesseurs
@@ -41,25 +33,24 @@ public class Voix {
 	}
 	
 	public byte[] getTabSon(){
-		return tabSon;
+		return super.getTabSon();
+	}
+
+	public String getContenu() {
+		return contenu;
 	}
 	
 	//Fonctions
-	public void lectureFichier(){	
-		OuvrirFichierLy fichier = null;
-		try {
-			fichier = new OuvrirFichierLy(nomFichier);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void analyseStr(){	
 		Note note;
 		
-		String[] noteList = fichier.getContenu().split(" ");
+		String[] noteList = contenu.split(" ");
 		
 		for(String str : noteList){
-			note = new Note(str);
-			notes.add(note);
+			if(str != ""){
+				note = new Note(str);
+				notes.add(note);
+			}
 		}
 	}
 	
@@ -72,9 +63,9 @@ public class Voix {
 		{
 			temp = GenerateurSon.createSinWaveBuffer(n.getFrequence(), n.getDuree());
 			
-			for(j = 0; j < temp.length && i < tabSon.length; j++)
+			for(j = 0; j < temp.length && i < super.getTabSon().length; j++)
 			{
-				tabSon[i] = temp[j];
+				super.getTabSon()[i] = temp[j];
 				i++;
 			}
 			j = 0;

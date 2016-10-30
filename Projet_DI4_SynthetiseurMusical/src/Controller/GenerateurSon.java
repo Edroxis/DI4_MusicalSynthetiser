@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
+import Model.Playable;
 import Model.Voix;
 
 public class GenerateurSon {
@@ -18,14 +19,14 @@ public class GenerateurSon {
 		return SAMPLE_RATE;
 	}
 	
-	public static void jouerMelodie(Voix part) throws LineUnavailableException {
+	public static void jouerMelodie(Playable sound) throws LineUnavailableException {
 		final AudioFormat af = new AudioFormat(GenerateurSon.getSampleRate(), 8, 1, true, true);
 		SourceDataLine line = AudioSystem.getSourceDataLine(af);
 
 		line.open(af, GenerateurSon.getSampleRate());
 		line.start();
 		
-		byte[] output = part.getTabSon();
+		byte[] output = sound.getTabSon();
 		
 		line.write(output, 0, output.length);
 		

@@ -7,12 +7,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class OuvrirFichierLy {
+public class FichierLy {
 
 	private String nomFichier;
 	private String contenuFichier;
 
-	public OuvrirFichierLy(String nomFichier) throws Exception {
+	public FichierLy(String nomFichier) throws Exception {
 		this.nomFichier = nomFichier;
 		contenuFichier = "";
 		contenuFichier = extraireContenu();

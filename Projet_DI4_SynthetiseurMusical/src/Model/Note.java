@@ -1,6 +1,6 @@
 package Model;
 
-public class Note {
+public class Note{
 	public static final double FREQ_LA_3 = 440;	// fréquences du LA3 ou LA440
 	public static final double R = 1.05946;
 	private static int octaveBase = 3;
@@ -59,7 +59,7 @@ public class Note {
 		
 		// trouver l'index de la note de l'enum Octave (sans altération)
 		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
-		if(numNote>5)
+		if(numNote>5) //correction par rapport au 1/2 ton mi-fa
 			numNote--;
 		//Du coup on devrait peut-etre expliquer comment on arrive à ce resultat
 		//ou on ferait ça à l'oral ? 

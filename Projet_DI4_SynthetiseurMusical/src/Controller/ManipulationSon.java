@@ -1,6 +1,12 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class ManipulationSon {
+	/**
+	 * @deprecated
+	 **/
 	public static byte[] mixer(byte[] t1, byte[] t2){
 		byte[] output = new byte[Math.max(t1.length, t2.length)];
 		int i;
@@ -29,5 +35,39 @@ public class ManipulationSon {
 		}
 		
 		return output;
+	}
+	
+	public static byte[] mixerMulti(ArrayList<byte[]> param)
+	{
+		int nbOctetsMax = 0, i, total = 0;
+		
+		CopyOnWriteArrayList<byte[]> toCalculate = new CopyOnWriteArrayList<byte[]>();
+		
+		for(i = 0; i<param.size(); i++)
+			toCalculate.add(param.get(i));
+		
+		//récupérer taille plus grand byte[]
+		for(i = 0; i<toCalculate.size(); i++)
+			if(nbOctetsMax < toCalculate.get(i).length)
+				nbOctetsMax = toCalculate.get(i).length;
+		
+		byte[] res = new byte[nbOctetsMax];
+		
+		i = 0;
+		//Parcourir les byte[]
+		for(i = 0; i < nbOctetsMax; i++){
+			for(byte[] tab : toCalculate){
+				//Si on dépasse la fin du tab courant
+				if(i == tab.length)
+					toCalculate.remove(tab);
+				else{
+					total += tab[i];
+				}
+			}
+			res[i] = (byte) (total / toCalculate.size());
+			total = 0;
+		}
+		
+		return res;
 	}
 }
