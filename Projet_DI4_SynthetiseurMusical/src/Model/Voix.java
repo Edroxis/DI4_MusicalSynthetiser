@@ -48,10 +48,13 @@ public class Voix extends Playable{
 		String[] noteList = contenu.split(" ");
 		
 		for(String str : noteList){
+			//Si note
 			if(!str.equals("")){
 				note = new Note(str);
 				notes.add(note);
 			}
+			//Si accord
+			//Si balise
 		}
 	}
 	
