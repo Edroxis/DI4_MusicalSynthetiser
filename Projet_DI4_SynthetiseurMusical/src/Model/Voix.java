@@ -48,7 +48,7 @@ public class Voix extends Playable{
 		String[] noteList = contenu.split(" ");
 		
 		for(String str : noteList){
-			if(str != ""){
+			if(!str.equals("")){
 				note = new Note(str);
 				notes.add(note);
 			}

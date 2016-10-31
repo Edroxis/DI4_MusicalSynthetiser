@@ -1,2 +1,2 @@
-e' g2 a4 b b8 c' b,4 a2 fd4 d d8 e8 fd4 g2 e4 e e8 dd8 e4 fd2 dd8 b,2
-n4 e g b e g b d fis a d fis a c e g c e g b dis fis a g
+e' g2  a4 b b8 c' b,4 a2    fd4 d d8 e8 fd4 g2  e4 e e8 dd8 e4 fd2   dd8 b,2
+n4 e g b  e g     b   d fis a   d fis   a   c e g  c e      g  b dis fis a g
