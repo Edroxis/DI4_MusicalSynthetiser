@@ -62,7 +62,7 @@ public class Voix extends Playable{
 		
 		for(Note n : notes)
 		{
-			temp = GenerateurSon.createSinWaveBuffer(n.getFrequence(), n.getDuree());
+			temp = n.getTabSon();
 			
 			for(j = 0; j < temp.length && i < super.getTabSon().length; j++)
 			{

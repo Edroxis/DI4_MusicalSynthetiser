@@ -1,6 +1,8 @@
 package Model;
 
-public class Note{
+import Controller.GenerateurSon;
+
+public class Note extends Playable{
 	public static final double FREQ_LA_3 = 440;	// fréquences du LA3 ou LA440
 	public static final double R = 1.05946;
 	private static int octaveBase = 3;
@@ -26,9 +28,14 @@ public class Note{
 			calculFrequ();
 		calculDuree();
 		
+		super.setTabSon(GenerateurSon.createSinWaveBuffer(getFrequence(), getDuree()));
 		/*System.out.println("numNote = " + hauteur.toInt());
 		System.out.println("frequence = " + frequence);
 		System.out.println("duree = " + duree);*/
+	}
+	
+	public byte[] getTabSon(){
+		return super.getTabSon();
 	}
 
 	public double getFrequence() {
