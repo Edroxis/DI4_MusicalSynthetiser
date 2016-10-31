@@ -1,4 +1,5 @@
 ﻿fréquence notes: http://jeanjacques.dialo.free.fr/frequenc.htm
+Sample rate: http://wiki.audacityteam.org/wiki/Sample_Rates
 lilypound: http://lilypond.org/easier-editing.fr.html
 fresobaldi (lilypound editor): http://www.frescobaldi.org/
 
