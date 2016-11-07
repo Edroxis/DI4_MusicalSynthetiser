@@ -40,7 +40,6 @@ public class GenerateurSon {
 	public static byte[] createSinWaveBuffer(double freq, int ms) {
 		int samples = (int) ((ms * SAMPLE_RATE) / 1000);
 		byte[] output = new byte[samples];
-		//
 		double period = (double) SAMPLE_RATE / freq;
 		for (int i = 0; i < output.length; i++) {
 			double angle = 2.0 * Math.PI * i / period;
