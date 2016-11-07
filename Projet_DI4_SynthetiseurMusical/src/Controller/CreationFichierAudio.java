@@ -8,10 +8,13 @@ import java.io.IOException;
 
 import javax.sound.sampled.*;
 
+import Model.Playable;
+
 public class CreationFichierAudio {
 
-	public static void saveWAV(byte[] tabSon) throws IOException{
+	public static void saveWAV(Playable track) throws IOException{
 		AudioFormat      frmt= new AudioFormat(GenerateurSon.SAMPLE_RATE,8,1,true,false);
+		byte[] tabSon = track.getTabSon();
         AudioInputStream ais = new AudioInputStream(
                    new ByteArrayInputStream(tabSon)
                   ,frmt

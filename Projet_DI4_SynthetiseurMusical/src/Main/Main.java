@@ -32,7 +32,7 @@ public class Main {
 		
 		Partition part1 = new Partition(fichier);
 		
-		//GenerateurSon.jouerMelodie(part1);
+		GenerateurSon.jouerMelodie(part1);
 	}
 
 }
