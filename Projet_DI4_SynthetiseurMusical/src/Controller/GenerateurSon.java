@@ -12,7 +12,7 @@ import Model.Playable;
 import Model.Voix;
 
 public class GenerateurSon {
-	protected static final int SAMPLE_RATE = 128 * 1024;
+	protected static final int SAMPLE_RATE = 44100;
 	private int TEMPO = 120; //Nb de noires par min
 	
 	public static int getSampleRate(){
