@@ -1,21 +1,23 @@
 package Model;
 
-public class Note {
+import Controller.GenerateurSon;
+
+public class Note extends Playable{
 	public static final double FREQ_LA_3 = 440;	// fréquences du LA3 ou LA440
 	public static final double R = 1.05946;
 	private static int octaveBase = 3;
-	private static Temps dureeBase = Temps.NOIRE;
 
 	private String chaineCaracNote;	// la chaine avec les caractéristiques de la note
 	private double frequence;
-	private int duree;	// duree de la note en ms
 	private Octave hauteur;
+	private int duree;	// duree de la note en ms
 	private int numOctave;
 	private Variation var;
 
 	// Constructeur
-	public Note(String str) {
+	public Note(String str, int duree) {
 		this.chaineCaracNote = str;
+		this.duree = duree;
 		construireNote();
 	}
 
@@ -24,23 +26,32 @@ public class Note {
 		analyserChaine();
 		if(hauteur != Octave.NONE)
 			calculFrequ();
-		calculDuree();
+		//calculDuree();
 		
+		super.setTabSon(GenerateurSon.createSinWaveBuffer(getFrequence(), getDuree()));
 		/*System.out.println("numNote = " + hauteur.toInt());
 		System.out.println("frequence = " + frequence);
 		System.out.println("duree = " + duree);*/
+	}
+	
+	public int getDuree() {
+		return duree;
+	}
+	
+	public byte[] getTabSon(){
+		return super.getTabSon();
 	}
 
 	public double getFrequence() {
 		return frequence;
 	}
-
-	public int getDuree() {
-		return duree;
-	}
 	
 	public Octave getHauteur(){
 		return hauteur;
+	}
+
+	public static void resetStaticValues() {
+		octaveBase = 3;
 	}
 
 	// Analyseur de chaines
@@ -59,7 +70,7 @@ public class Note {
 		
 		// trouver l'index de la note de l'enum Octave (sans altération)
 		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
-		if(numNote>5)
+		if(numNote>5) //correction par rapport au 1/2 ton mi-fa
 			numNote--;
 		//Du coup on devrait peut-etre expliquer comment on arrive à ce resultat
 		//ou on ferait ça à l'oral ? 
@@ -138,28 +149,5 @@ public class Note {
 			if (diff != 0)
 				frequence /= Math.pow(R, Math.abs(diff));
 		}
-	}
-
-	private void calculDuree() {
-		if(chaineCaracNote.endsWith("1")){
-			dureeBase = Temps.RONDE;
-		}
-		if(chaineCaracNote.endsWith("2")){
-			dureeBase = Temps.BLANCHE;
-		}
-		if(chaineCaracNote.endsWith("4")){
-			dureeBase = Temps.NOIRE;
-		}
-		if(chaineCaracNote.endsWith("6")){
-			dureeBase = Temps.NOIREPOINTEE;
-		}
-		if(chaineCaracNote.endsWith("8")){
-			dureeBase = Temps.CROCHE;
-		}
-		if(chaineCaracNote.endsWith("16")){
-			dureeBase = Temps.DOUBLE_CROCHE;
-		}
-		
-		duree = dureeBase.toInt();
 	}
 }

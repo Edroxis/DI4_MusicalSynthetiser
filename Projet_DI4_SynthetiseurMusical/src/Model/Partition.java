@@ -1,80 +1,63 @@
 package Model;
 
-import java.util.ArrayList;;
+import java.util.ArrayList;
+import Controller.*;
 
-public class Partition {
+public class Partition extends Playable{
+	//Attribut
+	private ArrayList<Voix> voix;
+	private String contenu;
+	private static int TEMPO = 80;//nombre de noires par minutes
+	private static int dureeNoire = 750;//durée d'une noire en ms
 	
-	private String nomFichier;
-	private byte[] tabSon;
-	private ArrayList<Note> notes;
-	
-	//Constructeurs
-	Partition(String nomFichier){
-		double i = 0;
-		this.nomFichier = nomFichier;
-		notes = new ArrayList<Note>();
+	//Constructeur
+	public Partition(FichierLy fichier){
+		super();
+		contenu = fichier.getContenu();
+		String[] split = contenu.split("\n");
+		this.voix = new ArrayList<>();
+		ArrayList<byte[]> listTabOctet = new ArrayList<>();
 		
-		//Lancer lecture des notes
-		lectureFichier();
+		for(String str : split){
+			if(str != ""){
+				Voix v = new Voix(str);
+				voix.add(v);
+				resetStaticValues();
+			}
+		}
 		
-		//Créer tabSon de la bonne taille
-		for(Note n : notes)
-			i += n.getDuree();
-		int samples = (int) (i * GenerateurSon.SAMPLE_RATE / 1000);
-		tabSon = new byte[samples];
+		for(Voix v : voix){
+			listTabOctet.add(v.getTabSon());
+		}
 		
-		//Remplis tableau d'octets décrivant le son
-		construireSon();
+		super.setTabSon(ManipulationSon.mixerMulti(listTabOctet));
 	}
 	
-	Partition(byte[] tab){
-		notes = new ArrayList<Note>();
-		tabSon = tab;
+	//Accesseur
+	public String getContenu(){
+		return contenu;
 	}
-
-	//Accesseurs
-	public ArrayList<Note> getNotes() {
-		return notes;
+	
+	public ArrayList<Voix> getVoix(){
+		return voix;
 	}
 	
 	public byte[] getTabSon(){
-		return tabSon;
+		return super.getTabSon();
 	}
 	
-	//Fonctions
-	public void lectureFichier(){	
-		OuvrirFichierLy fichier = null;
-		try {
-			fichier = new OuvrirFichierLy(nomFichier);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Note note;
-		
-		String[] noteList = fichier.getContenu().split(" ");
-		
-		for(String str : noteList){
-			note = new Note(str);
-			notes.add(note);
-		}
+	public void setTempo(int tempo){
+		TEMPO = tempo;
+		dureeNoire = (60 * 1000) /TEMPO;
 	}
 	
-	private void construireSon() {
-		byte[] temp;
-		int i = 0;
-		int j = 0;
-		
-		for(Note n : notes)
-		{
-			temp = GenerateurSon.createSinWaveBuffer(n.getFrequence(), n.getDuree());
-			
-			for(j = 0; j < temp.length && i < tabSon.length; j++)
-			{
-				tabSon[i] = temp[j];
-				i++;
-			}
-			j = 0;
-		}
+	public static int getDureeNoire(){
+		return dureeNoire;
+	}
+	
+	public static void resetStaticValues(){
+		TEMPO = 80;
+		dureeNoire = 750;
+		Accord.resetStaticValues();
 	}
 }
