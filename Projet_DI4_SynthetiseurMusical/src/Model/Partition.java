@@ -22,6 +22,7 @@ public class Partition extends Playable{
 			if(str != ""){
 				Voix v = new Voix(str);
 				voix.add(v);
+				resetStaticValues();
 			}
 		}
 		
@@ -52,5 +53,11 @@ public class Partition extends Playable{
 	
 	public static int getDureeNoire(){
 		return dureeNoire;
+	}
+	
+	public static void resetStaticValues(){
+		TEMPO = 80;
+		dureeNoire = 750;
+		Accord.resetStaticValues();
 	}
 }

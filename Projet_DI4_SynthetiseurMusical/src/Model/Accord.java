@@ -30,6 +30,11 @@ public class Accord extends Playable{
 		return duree;
 	}
 	
+	public static void resetStaticValues(){
+		dureeBase = Temps.NOIRE;
+		Note.resetStaticValues();
+	}
+	
 	//Methodes
 	private void construireAccord() {
 		if(chaineCarac.startsWith("<")){

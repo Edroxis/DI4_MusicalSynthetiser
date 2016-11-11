@@ -50,6 +50,10 @@ public class Note extends Playable{
 		return hauteur;
 	}
 
+	public static void resetStaticValues() {
+		octaveBase = 3;
+	}
+
 	// Analyseur de chaines
 	private int analyserChaine() {
 		char firstLetter;
