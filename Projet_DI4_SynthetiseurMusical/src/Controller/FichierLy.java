@@ -1,5 +1,3 @@
-/*Source: http://www.commentcamarche.net/forum/affich-590149-lire-un-fichier-texte-en-java*/
-
 package Controller;
 
 import java.io.BufferedReader;
@@ -22,6 +20,7 @@ public class FichierLy {
 		return contenuFichier;
 	}
 
+	/*Source: http://www.commentcamarche.net/forum/affich-590149-lire-un-fichier-texte-en-java*/
 	public String extraireContenu() throws Exception {
 		// lecture du fichier texte
 		try {

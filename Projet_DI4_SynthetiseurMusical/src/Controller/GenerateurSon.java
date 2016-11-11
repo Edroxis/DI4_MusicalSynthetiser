@@ -1,5 +1,4 @@
 package Controller;
-/*SOURCE: http://stackoverflow.com/questions/8632104/sine-wave-sound-generator-in-java*/
 
 import java.util.ArrayList;
 
@@ -34,6 +33,7 @@ public class GenerateurSon {
 		line.close();
 	}
 
+	/*SOURCE: http://stackoverflow.com/questions/8632104/sine-wave-sound-generator-in-java*/
 	public static byte[] createSinWaveBuffer(double freq, int ms) {
 		int samples = (int) ((ms * GenerateurSon.getSampleRate()) / 1000);
 		byte[] output = new byte[samples];
