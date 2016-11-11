@@ -24,7 +24,7 @@ public class test {
 		FichierLy fichier = null;
 		
 		try {
-			fichier = new FichierLy("stillAlive.txt");
+			fichier = new FichierLy("gammeMajeure.txt");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
