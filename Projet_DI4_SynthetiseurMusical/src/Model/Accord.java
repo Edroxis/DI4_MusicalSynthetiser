@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Controller.ManipulationSon;
 
-public class Accord extends Playable{
+public class Accord extends Playable implements VoixContenable{
 	private String chaineCarac;
 	
 	private ArrayList<Note> tabNotes;
@@ -18,7 +18,6 @@ public class Accord extends Playable{
 		
 		calculDuree();
 		construireAccord();
-		calculerTabSon();
 	}
 	
 	//Accesseurs
@@ -49,7 +48,11 @@ public class Accord extends Playable{
 		}
 	}
 
-	private void calculerTabSon() {
+	public void calculerTabSon() {
+		for(Note n : tabNotes){
+			n.calculerTabSon();
+		}
+		
 		if(tabNotes.size()==1){
 			super.setTabSon(tabNotes.get(0).getTabSon());
 		}

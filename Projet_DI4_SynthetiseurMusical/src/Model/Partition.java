@@ -46,7 +46,7 @@ public class Partition extends Playable{
 		return super.getTabSon();
 	}
 	
-	public void setTempo(int tempo){
+	public static void setTempo(int tempo){
 		TEMPO = tempo;
 		dureeNoire = (60 * 1000) /TEMPO;
 	}
@@ -56,8 +56,6 @@ public class Partition extends Playable{
 	}
 	
 	public static void resetStaticValues(){
-		TEMPO = 80;
-		dureeNoire = 750;
 		Accord.resetStaticValues();
 	}
 }

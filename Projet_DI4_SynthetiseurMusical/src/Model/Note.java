@@ -28,10 +28,13 @@ public class Note extends Playable{
 			calculFrequ();
 		//calculDuree();
 		
-		super.setTabSon(GenerateurSon.createSinWaveBuffer(getFrequence(), getDuree()));
 		/*System.out.println("numNote = " + hauteur.toInt());
 		System.out.println("frequence = " + frequence);
 		System.out.println("duree = " + duree);*/
+	}
+	
+	public void calculerTabSon(){
+		super.setTabSon(GenerateurSon.createSinWaveBuffer(getFrequence(), getDuree()));
 	}
 	
 	public int getDuree() {
@@ -72,9 +75,6 @@ public class Note extends Playable{
 		numNote = (((int) firstLetter - (int) 'a' + 5) % 7)*2; 
 		if(numNote>5) //correction par rapport au 1/2 ton mi-fa
 			numNote--;
-		//Du coup on devrait peut-etre expliquer comment on arrive à ce resultat
-		//ou on ferait ça à l'oral ? 
-		
 		
 		//Prise en compte de l'altération
 		trouverVariation(chaineCaracNote);
@@ -144,7 +144,7 @@ public class Note extends Playable{
 
 		if (diff > 0) // aller à la bonne fréquence
 		{
-			frequence *= Math.pow(R, Math.abs(diff));	//A REFAIRE (bug changement octave sur variation)
+			frequence *= Math.pow(R, Math.abs(diff));	
 		} else {
 			if (diff != 0)
 				frequence /= Math.pow(R, Math.abs(diff));

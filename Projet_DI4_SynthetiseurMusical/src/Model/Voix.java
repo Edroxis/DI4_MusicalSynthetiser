@@ -2,10 +2,10 @@ package Model;
 
 import java.util.ArrayList;
 
-import Controller.GenerateurSon;
+import Controller.*;
 
 public class Voix extends Playable{
-	private ArrayList<Accord> accords;
+	private ArrayList<VoixContenable> accords;
 	private String contenu;
 	
 	//Constructeurs
@@ -13,14 +13,18 @@ public class Voix extends Playable{
 		super();
 		double i = 0;
 		this.contenu = contenu;
-		accords = new ArrayList<Accord>();
+		accords = new ArrayList<VoixContenable>();
 		
 		//Lancer lecture des notes
 		analyseStr();
 		
 		//Créer tabSon de la bonne taille
-		for(Accord acc : accords)
-			i += acc.getDuree();
+		for(VoixContenable acc : accords){
+			if(acc.getClass()==Accord.class){
+				Accord temp = (Accord) acc;
+				i += temp.getDuree();
+			}
+		}
 		int samples = (int) (i * GenerateurSon.getSampleRate() / 1000);
 		super.setTabSon(new byte[samples]);
 		
@@ -29,7 +33,7 @@ public class Voix extends Playable{
 	}
 
 	//Accesseurs
-	public ArrayList<Accord> getNotes() {
+	public ArrayList<VoixContenable> getNotes() {
 		return accords;
 	}
 	
@@ -51,7 +55,7 @@ public class Voix extends Playable{
 		
 		for(String str : noteList){
 			//Si note
-			if(!str.equals("")){
+			if(!str.equals("") && !str.startsWith("\\")){
 				if(str.startsWith("<")){//si début d'accord détecté
 					accordEnConstruction = true;
 					accord += str+ " ";
@@ -73,6 +77,11 @@ public class Voix extends Playable{
 				accords.add(new Accord(accord));
 				accord = "";
 			}
+			
+			if(str.startsWith("\\")){
+				Balise bal = BaliseConstructeur.construireBalise(str);
+				accords.add(bal);
+			}
 		}
 	}
 	
@@ -81,16 +90,26 @@ public class Voix extends Playable{
 		int i = 0;
 		int j = 0;
 		
-		for(Accord acc : accords)
+		for(VoixContenable acc : accords)
 		{
-			temp = acc.getTabSon();
-			
-			for(j = 0; j < temp.length && i < super.getTabSon().length; j++)
-			{
-				super.getTabSon()[i] = temp[j];
-				i++;
+			if(acc.getClass()==Accord.class){
+				Accord tempAcc = (Accord) acc;
+				tempAcc.calculerTabSon();
+				temp = tempAcc.getTabSon();
+				
+				for(j = 0; j < temp.length && i < super.getTabSon().length; j++)
+				{
+					super.getTabSon()[i] = temp[j];
+					i++;
+				}
+				j = 0;
 			}
-			j = 0;
+			else{
+				if(acc.getClass().getSuperclass()==Balise.class){
+					Balise bal = (Balise) acc;
+					bal.execute();
+				}
+			}
 		}
 	}
 }

@@ -1,1 +1,1 @@
-<c ees g>4 <d f a> <e g b> <f aes c'> <g, bes d'> <a, c' e> <b, d' fis> n
+c c c \tempo=120 d d d \tempo=60 e e e
