@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-
 import Controller.*;
 
 public class Voix extends Playable{
@@ -19,14 +18,14 @@ public class Voix extends Playable{
 		analyseStr();
 		
 		//Créer tabSon de la bonne taille
-		for(VoixContenable acc : accords){
+		/*for(VoixContenable acc : accords){
 			if(acc.getClass()==Accord.class){
 				Accord temp = (Accord) acc;
 				i += temp.getDuree();
 			}
 		}
 		int samples = (int) (i * GenerateurSon.getSampleRate() / 1000);
-		super.setTabSon(new byte[samples]);
+		super.setTabSon(new byte[samples]);*/
 		
 		//Remplis tableau d'octets décrivant le son
 		construireSon();
@@ -86,6 +85,7 @@ public class Voix extends Playable{
 	}
 	
 	private void construireSon() {
+		ArrayList<Byte> res = new ArrayList<>();
 		byte[] temp;
 		int i = 0;
 		int j = 0;
@@ -97,10 +97,11 @@ public class Voix extends Playable{
 				tempAcc.calculerTabSon();
 				temp = tempAcc.getTabSon();
 				
-				for(j = 0; j < temp.length && i < super.getTabSon().length; j++)
+				for(j = 0; j < temp.length; j++)
 				{
-					super.getTabSon()[i] = temp[j];
-					i++;
+					/*super.getTabSon()[i] = temp[j];
+					i++;*/
+					res.add(temp[j]);
 				}
 				j = 0;
 			}
@@ -111,5 +112,12 @@ public class Voix extends Playable{
 				}
 			}
 		}
+		byte[] bytes = new byte[res.size()];
+		j=0;
+		// Unboxing byte values. (Byte[] to byte[])
+		for(Byte b: res)
+		    bytes[j++] = b.byteValue();
+		
+		super.setTabSon(bytes);
 	}
 }

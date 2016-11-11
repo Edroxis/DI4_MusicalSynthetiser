@@ -16,7 +16,6 @@ public class Accord extends Playable implements VoixContenable{
 		chaineCarac = str;
 		tabNotes = new ArrayList<>();
 		
-		calculDuree();
 		construireAccord();
 	}
 	
@@ -40,16 +39,19 @@ public class Accord extends Playable implements VoixContenable{
 			String temp = chaineCarac.substring(1, chaineCarac.indexOf(">"));
 			String[] split = temp.split(" ");
 			for(String str : split){
-				tabNotes.add(new Note(str, duree));
+				tabNotes.add(new Note(str));
 			}
 		}
 		else{
-			tabNotes.add(new Note(chaineCarac, duree));
+			tabNotes.add(new Note(chaineCarac));
 		}
 	}
 
 	public void calculerTabSon() {
+		calculDuree();
+		
 		for(Note n : tabNotes){
+			n.setDuree(duree);
 			n.calculerTabSon();
 		}
 		

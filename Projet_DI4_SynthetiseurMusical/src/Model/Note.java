@@ -15,9 +15,9 @@ public class Note extends Playable{
 	private Variation var;
 
 	// Constructeur
-	public Note(String str, int duree) {
+	public Note(String str) {
 		this.chaineCaracNote = str;
-		this.duree = duree;
+		duree = 0;
 		construireNote();
 	}
 
@@ -34,11 +34,17 @@ public class Note extends Playable{
 	}
 	
 	public void calculerTabSon(){
+		if(duree == 0)
+			System.out.println("Note - durée nulle");
 		super.setTabSon(GenerateurSon.createSinWaveBuffer(getFrequence(), getDuree()));
 	}
 	
 	public int getDuree() {
 		return duree;
+	}
+
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
 	
 	public byte[] getTabSon(){
