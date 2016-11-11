@@ -1,6 +1,6 @@
 package Model;
 
-public class Playable {
+public abstract class Playable {
 	//Attribut
 	private byte[] tabSon;
 	
