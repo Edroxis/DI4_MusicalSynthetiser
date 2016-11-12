@@ -1,18 +1,20 @@
 package Controller;
 
-import java.util.ArrayList;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 import Model.Playable;
-import Model.Voix;
 
+/**
+ * Classe qui gère la génération du son et la lecture sur la sortie standard
+ */
 public class GenerateurSon {
+	/**
+	 * Nombre d'échantillons par secondes, 44100/s permet de monter jusqu'à des sons à 20kHz
+	 */
 	protected static final int SAMPLE_RATE = 44100;
-	private int TEMPO = 120; //Nb de noires par min
 	
 	public static int getSampleRate(){
 		return SAMPLE_RATE;

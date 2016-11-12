@@ -77,7 +77,7 @@ public class Voix extends Playable{
 				accord = "";
 			}
 			
-			if(str.startsWith("\\")){
+			if(str.startsWith("\\")){//Si balise
 				Balise bal = BaliseConstructeur.construireBalise(str);
 				accords.add(bal);
 			}
@@ -112,6 +112,7 @@ public class Voix extends Playable{
 				}
 			}
 		}
+		/*SOURCE: http://stackoverflow.com/questions/12944377/how-to-convert-byte-to-byte-and-the-other-way-around*/
 		byte[] bytes = new byte[res.size()];
 		j=0;
 		// Unboxing byte values. (Byte[] to byte[])
