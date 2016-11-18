@@ -1,1 +1,15 @@
-e' e'd e'is e'b e'es a b a a b c' d' e' f' g' e' f' g' f' c'
+e e e e b e a b a a f
+b c d e f g e f g f c
+a b c d e f g b a c d
+
+e e e e b e a b a a f
+b c d e f g e f g f c
+a b c d e f g b a c d
+
+e e e e b e a b a a f
+b c d e f g e f g f c
+a b c d e f g b a c d
+
+e e e e b e a b a a f
+b c d e f g e f g f c
+a b c d e f g b a c d
