@@ -25,37 +25,38 @@ public class FichierLy {
 
 	public String formaterContenu(String contenuFichier) throws Exception {
 		String NouveauContenu = "";
-		int compt = 0, comptVoix = 0, NbVoix = 0, NbEspace = 0;
-		
-		//On split la chaîne de caractères par rapport aux retours à la ligne
+		int compt = 0, NbVoix = 0, NumVoix = 0;
+
+		// On split la chaîne de caractères par rapport aux retours à la ligne
 		String Tableau[] = contenuFichier.split("\n");
-		int NbLignes = Tableau.length;
-		
-		//Calcul du nombre de voix grâce aux lignes vides
-		while (!Tableau[comptVoix].equals("")) {
+
+		// Calcul du nombre de voix grâce aux lignes vides
+		while (!Tableau[compt].equals("")) {
 			NbVoix++;
-			comptVoix++;
+			compt++;
 		}
-		
-		//Calcul du nombre de lignes vides dans le fichier texte
-		for (; compt < NbLignes; compt++) {
-			if (Tableau[compt].equals(""))
-				NbEspace++;
+
+		// Initialisation du tableau temporaire
+		String TabTemp[] = new String[NbVoix];
+		for (compt = 0; compt < TabTemp.length; compt++) {
+			TabTemp[compt] = "";
 		}
-		
-		//Réécriture du fichier texte
-		for (comptVoix = 0; comptVoix <= NbVoix - 1; comptVoix++) {
-			compt = 0;
-			for (int i = 0; i < NbEspace + 1; i++) {
-				NouveauContenu = NouveauContenu + Tableau[compt + comptVoix] + " ";
-				compt = compt + (NbVoix + 1);
-				if (compt >= NbLignes) {
-					compt = compt - NbVoix;
-				}
+
+		// On réécrit ligne par ligne dans le tableau temporaire, avec une ligne par voix  
+		for (compt = 0; compt < Tableau.length; compt++) {
+			// Si on dépasse le nombre de voix, la prochaine ligne reviendra à la 1ère voix
+			if ((NumVoix + 1) > TabTemp.length) {
+				NumVoix = NumVoix - NbVoix;
+				compt++;
 			}
-			NouveauContenu = NouveauContenu + '\n';
+			TabTemp[NumVoix] = TabTemp[NumVoix] + Tableau[compt] + " ";
+			NumVoix++;
 		}
-		System.out.println(NouveauContenu);
+
+		// On réécrit le tableau temporaire dans un String 
+		for (compt = 0; compt < TabTemp.length; compt++) {
+			NouveauContenu = NouveauContenu + TabTemp[compt] + '\n';
+		}
 		return NouveauContenu;
 	}
 
