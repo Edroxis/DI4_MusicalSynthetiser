@@ -59,6 +59,7 @@ public class Note extends Playable{
 	public Note(String str) {
 		this.chaineCaracNote = str;
 		duree = 0;
+		var = null;
 		construireNote();
 	}
 
@@ -83,17 +84,24 @@ public class Note extends Playable{
 	}
 
 	/**
-	 * @return la fréquence de la note
+	 * @return La fréquence de la note
 	 */
 	public double getFrequence() {
 		return frequence;
 	}
 	
 	/**
-	 * @return la hauteur de la note
+	 * @return La hauteur de la note
 	 */
 	public Octave getHauteur(){
 		return hauteur;
+	}
+	
+	/**
+	 * @return La variation de la note courante
+	 */
+	public Variation getVariation(){
+		return var;
 	}
 	
 	// Methodes
@@ -142,7 +150,7 @@ public class Note extends Playable{
 		firstLetter = chaineCaracNote.charAt(0);
 		//System.out.println(firstLetter);
 		//Si silence
-		if(firstLetter == 'n'){
+		if(firstLetter == 'r'){
 			numNote = 12;
 			frequence = 1;
 			hauteur = Octave.NONE;
@@ -193,7 +201,7 @@ public class Note extends Playable{
 	 */
 	private void trouverVariation() {
 		String str = chaineCaracNote.substring(1);
-		var = Variation.NEUTRE;
+		
 		//Si dièse
 		if(str.indexOf('d')!=-1 || str.indexOf("is")!=-1)
 			var = Variation.DIESE;

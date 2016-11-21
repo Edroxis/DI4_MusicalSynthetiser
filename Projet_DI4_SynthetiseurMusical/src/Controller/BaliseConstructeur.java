@@ -27,8 +27,19 @@ public class BaliseConstructeur {
 			str = str.substring(str.indexOf("=")+1);
 			
 			res = new TempoModifier(Integer.parseInt(str));
+			
+			return res;
+		}
+		//Si balise modificateur d'armure
+		if(str.startsWith("armure")){
+			str = str.substring(str.indexOf("=")+1);
+			
+			res = new ArmureModifier(str);
+			
+			return res;
 		}
 		
-		return res;
+		System.err.println("Balise non reconnue: " + str);
+		return null;
 	}
 }

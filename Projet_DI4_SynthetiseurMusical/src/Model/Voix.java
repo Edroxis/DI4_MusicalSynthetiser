@@ -1,31 +1,23 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import Controller.*;
 
 public class Voix extends Playable{
 	private ArrayList<VoixContenable> accords;
 	private String contenu;
+	private static HashMap<Octave, Variation> armure = new HashMap<>();
 	
 	//Constructeurs
 	public Voix(String contenu){
 		super();
-		double i = 0;
 		this.contenu = contenu;
 		accords = new ArrayList<VoixContenable>();
 		
 		//Lancer lecture des notes
 		analyseStr();
-		
-		//Créer tabSon de la bonne taille
-		/*for(VoixContenable acc : accords){
-			if(acc.getClass()==Accord.class){
-				Accord temp = (Accord) acc;
-				i += temp.getDuree();
-			}
-		}
-		int samples = (int) (i * GenerateurSon.getSampleRate() / 1000);
-		super.setTabSon(new byte[samples]);*/
 		
 		//Remplis tableau d'octets décrivant le son
 		construireSon();
@@ -42,6 +34,10 @@ public class Voix extends Playable{
 
 	public String getContenu() {
 		return contenu;
+	}
+
+	public static void setArmure(HashMap<Octave, Variation> param) {
+		armure = param;
 	}
 	
 	//Fonctions
@@ -87,7 +83,6 @@ public class Voix extends Playable{
 	private void construireSon() {
 		ArrayList<Byte> res = new ArrayList<>();
 		byte[] temp;
-		int i = 0;
 		int j = 0;
 		
 		for(VoixContenable acc : accords)
@@ -99,8 +94,6 @@ public class Voix extends Playable{
 				
 				for(j = 0; j < temp.length; j++)
 				{
-					/*super.getTabSon()[i] = temp[j];
-					i++;*/
 					res.add(temp[j]);
 				}
 				j = 0;
