@@ -1,2 +1,2 @@
-g'8 fis e e fis2         n2          n4    n8  a,8 g' fis e   e4   fis6     d4    e8  a,1                     a8 e'4   fis8 g6      e8 cis4 d6       e4    a,8 a4     fis'6    fis2
-n2          a,8 d' fis d b, d' fis d a, d' fis d   b, d'  fis d a, d' fis d b, d' fis d a, d' fis d b, d' fis d  b, e' g    e b, e' g  e a, e' g cis a, e' g   cis a, d' fis d b, d' fis d
+g'8 fis e e fis2         r2          r4    r8  a,8 g' fis e   e4   fis6     d4    e8  a,1                     a8 e'4   fis8 g6      e8 cis4 d6       e4    a,8 a4     fis'6    fis2
+r2          a,8 d' fis d b, d' fis d a, d' fis d   b, d'  fis d a, d' fis d b, d' fis d a, d' fis d b, d' fis d  b, e' g    e b, e' g  e a, e' g cis a, e' g   cis a, d' fis d b, d' fis d

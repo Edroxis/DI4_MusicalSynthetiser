@@ -25,7 +25,7 @@ public class Main {
 		FichierLy fichier = null;
 		
 		try {
-			fichier = new FichierLy("test.txt");
+			fichier = new FichierLy("gammeMineure.txt");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
