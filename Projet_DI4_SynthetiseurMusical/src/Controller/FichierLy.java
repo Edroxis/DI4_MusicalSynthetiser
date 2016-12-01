@@ -14,7 +14,7 @@ public class FichierLy {
 		this.nomFichier = nomFichier;
 		contenuFichier = "";
 		contenuFichier = extraireContenu();
-		formaterContenu(contenuFichier);
+		contenuFichier = formaterContenu(contenuFichier);
 	}
 
 	public String getContenu() {
@@ -22,40 +22,81 @@ public class FichierLy {
 	}
 
 	public String formaterContenu(String contenuFichier) throws Exception {
-		String NouveauContenu = "";
-		int compt = 0, NbVoix = 0, NumVoix = 0;
-
-		// On split la chaîne de caractères par rapport aux retours à la ligne
+		int NbVoix, formated;
+		String TabTemp[];
+		// On split la chaine de caracteres par rapport aux retours a la
+		// ligne
 		String Tableau[] = contenuFichier.split("\n");
+		formated = isFormated(Tableau);
+		if (formated > 0) {
+			// Calcul du nombre de voix grace aux lignes vides
+			NbVoix = calculNbVoix(Tableau);
 
-		// Calcul du nombre de voix grâce aux lignes vides
+			TabTemp = new String[NbVoix];
+			// Initialisation du tableau temporaire
+			initialiseTableau(TabTemp);
+
+			// On reecrit ligne par ligne dans le tableau temporaire, avec
+			// une ligne par voix
+			remplirTableau(Tableau, TabTemp, NbVoix);
+
+			// On reecrit le tableau temporaire dans le String
+			contenuFichier = transfererContenu(TabTemp);
+			return contenuFichier;
+		} else {
+			return contenuFichier;
+		}
+	}
+
+	private int isFormated(String Tableau[]) {
+		int compt = 0;
+		int NbLigneVide = 0;
+		for (; compt < Tableau.length; compt++) {
+			if (Tableau[compt].equals(""))
+				NbLigneVide++;
+		}
+		return NbLigneVide;
+	}
+
+	private int calculNbVoix(String Tableau[]) {
+		int compt = 0, NbVoix = 0;
 		while (!Tableau[compt].equals("")) {
 			NbVoix++;
 			compt++;
 		}
+		return NbVoix;
+	}
 
-		// Initialisation du tableau temporaire
-		String TabTemp[] = new String[NbVoix];
-		for (compt = 0; compt < TabTemp.length; compt++) {
-			TabTemp[compt] = "";
+	private String[] initialiseTableau(String Tableau[]) {
+		int compt = 0;
+		for (; compt < Tableau.length; compt++) {
+			Tableau[compt] = "";
 		}
+		return Tableau;
+	}
 
-		// On réécrit ligne par ligne dans le tableau temporaire, avec une ligne par voix  
-		for (compt = 0; compt < Tableau.length; compt++) {
-			// Si on dépasse le nombre de voix, la prochaine ligne reviendra à la 1ère voix
-			if ((NumVoix + 1) > TabTemp.length) {
+	private String[] remplirTableau(String Tableau[], String newTab[], int NbVoix) {
+		int compt = 0, NumVoix = 0;
+		for (; compt < Tableau.length; compt++) {
+			// Si on depasse le nombre de voix, la prochaine ligne
+			// reviendra a la 1ere voix
+			if ((NumVoix + 1) > newTab.length) {
 				NumVoix = NumVoix - NbVoix;
 				compt++;
 			}
-			TabTemp[NumVoix] = TabTemp[NumVoix] + Tableau[compt] + " ";
+			newTab[NumVoix] = newTab[NumVoix] + Tableau[compt] + " ";
 			NumVoix++;
 		}
+		return newTab;
+	}
 
-		// On réécrit le tableau temporaire dans un String 
-		for (compt = 0; compt < TabTemp.length; compt++) {
-			NouveauContenu = NouveauContenu + TabTemp[compt] + '\n';
+	private String transfererContenu(String Tableau[]) {
+		int compt = 0;
+		String contenu = "";
+		for (; compt < Tableau.length; compt++) {
+			contenu = contenu + Tableau[compt] + '\n';
 		}
-		return NouveauContenu;
+		return contenu;
 	}
 
 	public String extraireContenu() throws Exception {
