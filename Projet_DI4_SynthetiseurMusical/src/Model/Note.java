@@ -131,6 +131,7 @@ public class Note extends Playable {
 	 * Calcul de la piste de la note
 	 */
 	public void calculerTabSon() {
+		recalculerVariation();
 		if (duree == 0)
 			System.err.println("Note - durée nulle");
 		else {
@@ -163,24 +164,48 @@ public class Note extends Playable {
 			hauteur = Octave.NONE;
 			return 0;
 		}
-		numNote = (((int) firstLetter - (int) 'a' + 5) % 7) * 2;
+		
 		// Trouver l'index de la note de l'enum Octave (sans altération)
-		numNote = trouverNote(numNote);
+		numNote = trouverNote(firstLetter);
 
 		// Prise en compte de l'altération
 		trouverVariation();
 		numNote = alterationNote(numNote);
 		numNote = testerOctave(numNote);
+		hauteur = Octave.getNote(numNote);// Récupérer la note
 		changerOctave();
 		return 0;
 	}
 
-	public int trouverNote(int numNote) {
+	public int trouverNote(char firstLetter) {
+		int numNote = (((int) firstLetter - (int) 'a' + 5) % 7) * 2;
+		
 		if (numNote > 5) // correction par rapport au 1/2 ton mi-fa
 			numNote--;
 		return numNote;
 	}
 
+	/**
+	 * Permet de trouver l'altération de la note actuelle
+	 */
+	private void trouverVariation() {
+		String str = chaineCaracNote.substring(1);
+
+		var = null;
+		
+		// Si dièse
+		if (str.indexOf('d') != -1 || str.indexOf("is") != -1)
+			var = Variation.DIESE;
+
+		// Si bémole
+		if (str.indexOf('b') != -1 || str.indexOf("es") != -1)
+			var = Variation.BEMOLE;
+		
+		//Si béquart
+		if(str.indexOf('n') != -1)
+			var = Variation.NEUTRE;
+	}
+	
 	private int alterationNote(int numNote) {
 		if (var == Variation.DIESE)
 			numNote++;
@@ -194,6 +219,20 @@ public class Note extends Playable {
 		}
 		return numNote;
 	}
+	
+	public void recalculerVariation(){
+		if(Voix.getArmure().containsKey(hauteur)){
+			if(var == null){
+				int numNote = hauteur.toInt();
+				var = Voix.getArmure().get(hauteur);
+				
+				numNote = alterationNote(numNote);
+				
+				hauteur = Octave.getNote(numNote);
+				calculFrequ();
+			}
+		}
+	}
 
 	private int testerOctave(int numNote) {
 		if (numNote / 12 == 1)// Si passage à l'octave sup
@@ -201,7 +240,7 @@ public class Note extends Playable {
 			numOctave++;
 			numNote %= 12;
 		}
-		hauteur = Octave.getNote(numNote);// Récupérer la note
+		
 		return numNote;
 	}
 
@@ -213,21 +252,6 @@ public class Note extends Playable {
 		int countDown = chaineCaracNote.length() - chaineCaracNote.replace(",", "").length();
 		octaveBase -= countDown;
 		numOctave = octaveBase;
-	}
-
-	/**
-	 * Permet de trouver l'altération de la note actuelle
-	 */
-	private void trouverVariation() {
-		String str = chaineCaracNote.substring(1);
-
-		// Si dièse
-		if (str.indexOf('d') != -1 || str.indexOf("is") != -1)
-			var = Variation.DIESE;
-
-		// Si bémole
-		if (str.indexOf('b') != -1 || str.indexOf("es") != -1)
-			var = Variation.BEMOLE;
 	}
 
 	/**

@@ -1,1 +1,1 @@
-f f f \armure=fis f f f
+f r f r \armure=fis f r fn
