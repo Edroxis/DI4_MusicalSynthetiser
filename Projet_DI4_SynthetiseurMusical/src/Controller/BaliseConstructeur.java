@@ -8,7 +8,7 @@ import Model.*;
 public class BaliseConstructeur {
 	//Constructeur
 	/**
-	 * Constructeur en priver pour ne pas pouvoir instancier cette classe
+	 * Constructeur en privé pour ne pas pouvoir instancier cette classe
 	 */
 	private BaliseConstructeur(){}
 	

@@ -48,7 +48,14 @@ public class GenerateurSon {
 		line.close();
 	}
 
+	
 	/*SOURCE: http://stackoverflow.com/questions/8632104/sine-wave-sound-generator-in-java*/
+	/**
+	 * Crée une sinusoïde à partir de la fréquence et de la durée
+	 * @param freq fréquence de la note
+	 * @param ms durée de la note
+	 * @return la sinusoïde correspondant à la note
+	 */
 	public static byte[] createSinWaveBuffer(double freq, int ms) {
 		int samples = (int) ((ms * GenerateurSon.getSampleRate()) / 1000);
 		byte[] output = new byte[samples];
@@ -59,8 +66,6 @@ public class GenerateurSon {
 		for (int i = 0; i < output.length; i++) {
 			double angle = 2.0 * Math.PI * i / period;
 			output[i] = (byte) (Math.sin(angle) * 127f);
-			if(freq == 1) //si on lit un silence
-				output[i] = 0;/*TODO A supprimer?*/
 		}
 		return output;
 	}
