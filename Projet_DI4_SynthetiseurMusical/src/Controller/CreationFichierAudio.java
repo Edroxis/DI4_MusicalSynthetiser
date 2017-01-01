@@ -38,4 +38,20 @@ public class CreationFichierAudio {
                   ,AudioFileFormat.Type.WAVE
                   ,new File(strDate+".wav"));
 	}
+	
+	public static void saveWAV(Playable track, String path) throws IOException{
+		AudioFormat      frmt= new AudioFormat(GenerateurSon.SAMPLE_RATE,8,1,true,false);
+		byte[] tabSon = track.getTabSon();
+        //Initialisation de l'input
+		AudioInputStream ais = new AudioInputStream(
+                   new ByteArrayInputStream(tabSon)
+                  ,frmt
+                  ,tabSon.length);
+        
+        //Ecriture dans le fichier
+        AudioSystem.write(
+                   ais
+                  ,AudioFileFormat.Type.WAVE
+                  ,new File(path));
+	}
 }
