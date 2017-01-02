@@ -24,7 +24,7 @@ public class GenerateurSon {
 	 * 1 ~50% correction et décalage très faible,
 	 * 2 et + bonne correction mais décalage audible sur les longs morceaux et 
 	 */
-	public static int CORRECTION_PARASITAGE = 2;
+	public static int CORRECTION_PARASITAGE = 1;
 	
 	/**
 	 * Accesseur du Smple Rate
@@ -85,7 +85,13 @@ public class GenerateurSon {
 		// AntiParasite Methode 1 - Réduction du bruit inter-notes par allongement des sinusoïdales vers 0
 		// Décalage très faible
 		if(CORRECTION_PARASITAGE == 1){
-			while(!(output.get(i-1)>-20 && output.get(i-1)<20)) {
+			boolean positif;
+			if(output.get(i-1)>0)
+				positif = true;
+			else
+				positif = false;
+			
+			while(!((output.get(i-1)>0 && !positif) || (output.get(i-1)<0 && positif))) {
 				i++;
 				angle = 2.0 * Math.PI * i / period;
 				output.add((byte) (Math.sin(angle) * 127f));
@@ -110,6 +116,7 @@ public class GenerateurSon {
 		return toPrimitives(output2);
 	}
 	
+	/*SOURCE: https://stackoverflow.com/questions/6430841/java-byte-to-byte*/
 	public static byte[] toPrimitives(Byte[] oBytes)
 	{
 	    byte[] bytes = new byte[oBytes.length];
