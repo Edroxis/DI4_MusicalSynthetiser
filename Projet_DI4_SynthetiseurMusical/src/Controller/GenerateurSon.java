@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
@@ -15,6 +17,14 @@ public class GenerateurSon {
 	 * Nombre d'échantillons par secondes, 44100/s permet de monter jusqu'à des sons à 20kHz
 	 */
 	protected static final int SAMPLE_RATE = 44100;
+	
+	/**
+	 * Permet de choisir l'algorithme d'antiparasitage: 
+	 * 0 aucune correction, 
+	 * 1 ~50% correction et décalage très faible,
+	 * 2 et + bonne correction mais décalage audible sur les longs morceaux et 
+	 */
+	public static int CORRECTION_PARASITAGE = 2;
 	
 	/**
 	 * Accesseur du Smple Rate
@@ -58,16 +68,57 @@ public class GenerateurSon {
 	 */
 	public static byte[] createSinWaveBuffer(double freq, int ms) {
 		int samples = (int) ((ms * GenerateurSon.getSampleRate()) / 1000);
-		byte[] output = new byte[samples];
+		//byte[] output = new byte[samples];
+		ArrayList<Byte> output = new ArrayList<>();
+		int i;
+		double angle;
 		
 		//Calcul de la période
 		double period = (double) GenerateurSon.getSampleRate() / freq;
 		//Remplissage du Tableau d'Octets
-		for (int i = 0; i < output.length; i++) {
-			double angle = 2.0 * Math.PI * i / period;
-			output[i] = (byte) (Math.sin(angle) * 127f);
+		for (i = 0; i < samples; i++) {
+			angle = 2.0 * Math.PI * i / period;
+			output.add((byte) (Math.sin(angle) * 127f));
+			//System.out.println(output[i]);
 		}
-		return output;
+		
+		// AntiParasite Methode 1 - Réduction du bruit inter-notes par allongement des sinusoïdales vers 0
+		// Décalage très faible
+		if(CORRECTION_PARASITAGE == 1){
+			while(!(output.get(i-1)>-20 && output.get(i-1)<20)) {
+				i++;
+				angle = 2.0 * Math.PI * i / period;
+				output.add((byte) (Math.sin(angle) * 127f));
+				
+			}
+		}
+		
+		// AntiParasite Methode 2 - Réduction du bruit inter-notes par allongement des sinusoïdales vers 0 par les négatifs
+		// Décalage audible sur morceaux de plus de 1 ou 2 min
+		if(CORRECTION_PARASITAGE >= 2){
+			while(true) {
+				i++;
+				angle = 2.0 * Math.PI * i / period;
+				if(!(output.get(i-2) < 0 && (byte) (Math.sin(angle) * 127f) > 0) && output.get(i-2) != 0)
+					output.add((byte) (Math.sin(angle) * 127f));
+				else{ break;}
+			}
+		}
+			
+		Byte[] output2 = output.toArray(new Byte[0]);
+		
+		return toPrimitives(output2);
+	}
+	
+	public static byte[] toPrimitives(Byte[] oBytes)
+	{
+	    byte[] bytes = new byte[oBytes.length];
+
+	    for(int i = 0; i < oBytes.length; i++) {
+	        bytes[i] = oBytes[i];
+	    }
+
+	    return bytes;
 	}
 
 }

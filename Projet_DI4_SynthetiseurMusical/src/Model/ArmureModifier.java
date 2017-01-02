@@ -7,7 +7,7 @@ public class ArmureModifier extends Balise{
 	
 	public ArmureModifier(String str){
 		armure = new HashMap<>();
-		String[] split = str.split(",");
+		String[] split = str.split("-");//TODO corriger cumul notes armure
 		
 		for(int i = 0; i < split.length; i++){
 			//Trouver l'index de la note de l'enum Octave (sans altération)

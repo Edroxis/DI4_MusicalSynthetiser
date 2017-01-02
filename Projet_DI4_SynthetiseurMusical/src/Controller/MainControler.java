@@ -131,7 +131,7 @@ public class MainControler {
 				
 				String fileLocation = "";
 				if(soundFileSaver.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
-			    	fileLocation = textFileChooser.getSelectedFile().getAbsolutePath();
+			    	fileLocation = soundFileSaver.getSelectedFile().getAbsolutePath();
 			    	if(fileLocation.endsWith("/"))
 			            fileLocation += new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss", Locale.FRANCE).format(new Date());
 			    	if(!fileLocation.endsWith(".wav"))
