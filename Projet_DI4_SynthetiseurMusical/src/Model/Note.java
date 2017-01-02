@@ -160,7 +160,7 @@ public class Note extends Playable {
 		// Si silence
 		if (firstLetter == 'r') {
 			numNote = 12;
-			// frequence = 1;
+			frequence = 0;
 			hauteur = Octave.NONE;
 			return 0;
 		}
@@ -251,7 +251,7 @@ public class Note extends Playable {
 		octaveBase += countUp;
 		int countDown = chaineCaracNote.length() - chaineCaracNote.replace(",", "").length();
 		octaveBase -= countDown;
-		numOctave = octaveBase;
+		numOctave += octaveBase;
 	}
 
 	/**

@@ -78,9 +78,9 @@ public class Voix extends Playable{
 		return armure;
 	}
 	
-	//Fonctions
+	// Méthodes
 	/**
-	 * Fonction qui analyse la chaine caractéristique de la Voix
+	 * Méthode qui analyse la chaine caractéristique de la Voix
 	 */
 	private void analyseStr(){	
 		Accord acc;
@@ -167,5 +167,10 @@ public class Voix extends Playable{
 		    bytes[j++] = b.byteValue();
 		
 		super.setTabSon(bytes);
+	}
+	
+	public static void resetStaticValues(){
+		armure.clear();
+		Accord.resetStaticValues();
 	}
 }

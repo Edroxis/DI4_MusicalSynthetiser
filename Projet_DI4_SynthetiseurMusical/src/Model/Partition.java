@@ -47,6 +47,8 @@ public class Partition extends Playable{
 	}
 	
 	public static void setTempo(int tempo){
+		if(tempo<=0)
+			tempo = 80;
 		TEMPO = tempo;
 		dureeNoire = (60 * 1000) /TEMPO;
 	}
@@ -56,6 +58,7 @@ public class Partition extends Playable{
 	}
 	
 	public static void resetStaticValues(){
-		Accord.resetStaticValues();
+		setTempo(0);
+		Voix.resetStaticValues();
 	}
 }

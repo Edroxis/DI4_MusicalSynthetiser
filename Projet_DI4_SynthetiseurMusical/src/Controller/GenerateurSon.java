@@ -24,7 +24,7 @@ public class GenerateurSon {
 	 * 1 ~50% correction et décalage très faible,
 	 * 2 et + bonne correction mais décalage audible sur les longs morceaux et 
 	 */
-	public static int CORRECTION_PARASITAGE = 1;
+	public static int CORRECTION_PARASITAGE = 2;
 	
 	/**
 	 * Accesseur du Smple Rate
@@ -71,20 +71,28 @@ public class GenerateurSon {
 		//byte[] output = new byte[samples];
 		ArrayList<Byte> output = new ArrayList<>();
 		int i;
-		double angle;
+		double angle, period;
 		
 		//Calcul de la période
-		double period = (double) GenerateurSon.getSampleRate() / freq;
+		if(freq != 0)
+			period = (double) GenerateurSon.getSampleRate() / freq;
+		else	//Si silence
+			period = 0;
+		
 		//Remplissage du Tableau d'Octets
 		for (i = 0; i < samples; i++) {
-			angle = 2.0 * Math.PI * i / period;
-			output.add((byte) (Math.sin(angle) * 127f));
+			if(freq != 0){
+				angle = 2.0 * Math.PI * i / period;
+				output.add((byte) (Math.sin(angle) * 127f));
+			}
+			else
+				output.add((byte) 0);
 			//System.out.println(output[i]);
 		}
 		
 		// AntiParasite Methode 1 - Réduction du bruit inter-notes par allongement des sinusoïdales vers 0
 		// Décalage très faible
-		if(CORRECTION_PARASITAGE == 1){
+		if(CORRECTION_PARASITAGE == 1 && output.get(i-1)!=0){
 			boolean positif;
 			if(output.get(i-1)>0)
 				positif = true;

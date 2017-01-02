@@ -24,7 +24,11 @@ public class BaliseConstructeur {
 		//Si balise de modification du tempo
 		if(str.startsWith("tempo")){	
 			//Récupération de la nouvelle valeure du tempo
-			str = str.substring(str.indexOf("=")+1);
+			int indexEqual = str.indexOf("=")+1;
+			if(indexEqual != 0)
+				str = str.substring(indexEqual);
+			else
+				str = "80";
 			
 			res = new TempoModifier(Integer.parseInt(str));
 			
