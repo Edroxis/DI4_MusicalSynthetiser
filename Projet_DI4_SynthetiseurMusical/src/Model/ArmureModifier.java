@@ -2,9 +2,19 @@ package Model;
 
 import java.util.HashMap;
 
+/**
+ * Classe permettant l'utilisation des balises de modifications à l'armure
+ */
 public class ArmureModifier extends Balise{
+	/**
+	 * Hashmap contenant l'octave et la variation pour l'armure
+	 */
 	private HashMap<Octave, Variation> armure;
 	
+	//Constructeur
+	/**
+	 * Constructeur de l'objet ArmureModifier
+	 */
 	public ArmureModifier(String strParam){
 		armure = new HashMap<>();
 		String[] split = strParam.split(",");
@@ -30,6 +40,9 @@ public class ArmureModifier extends Balise{
 			}
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void execute(){
 		Voix.setArmure(armure);

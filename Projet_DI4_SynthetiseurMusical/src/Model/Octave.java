@@ -1,18 +1,41 @@
 package Model;
 
+/**
+ * Enumération contenant les notes ainsi que les variations de celles-ci, associées à un entier
+ */
 public enum Octave {
 	SID(0), DO(0), DOD(1), REB(1), RE(2), RED(3), MIB(3), MI(4), FAB(4), FA(5), 
 	FAD(6), SOLB(6), SOL(7), SOLD(8), LAB(8), LA(9), LAD(10), SIB(10), SI(11), NONE(-1);
+	
+	/**
+	 * Numéro de l'octave
+	 */
 	private final int code;
 
+	//Constructeurs
+	/**
+	 * Contructeur de l'octave
+	 * @param code
+	 */
 	private Octave(int code) {
 		this.code = code;
 	}
 
+	//Accesseurs
+	/**
+	 * @return code
+	 *				Numéro de l'octave
+	 */
 	public int toInt() {
 		return code;
 	}
 	
+	/**
+	 * 
+	 * @param arg 
+	 * 				Entier dont on cherche la note
+	 * @return La note correspondant à l'entier en paramètre
+	 */
 	public static Octave getNote(int arg){
 		switch(arg){
 		case 0: return DO;
