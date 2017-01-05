@@ -6,7 +6,9 @@ package Model;
 public abstract class Balise implements VoixContenable {
 
 	/**
-	 * 
+	 * Méthode pour créer une balise
 	 */
-	 public void execute(){System.err.println("Balise vide");}
+	public void execute() {
+		System.err.println("Balise vide");
+	}
 }

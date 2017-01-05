@@ -21,33 +21,61 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Partition;
 import view.MainWindow;
 
+/**
+ * Classe pour gérer le controleur de l'interface
+ */
 public class MainControler {
+	/**
+	 * View de l'interface
+	 */
 	private MainWindow view;
+
+	/**
+	 * JFrame de l'interface
+	 */
 	private JFrame viewFC;
-	
+
+	/**
+	 * Classe permettant de choisir un fichier texte
+	 */
 	private JFileChooser textFileChooser;
+
+	/**
+	 * Classe permettant de choisir un fichier son
+	 */
 	private JFileChooser soundFileSaver;
-	
-	MainControler(){
+
+	/**
+	 * Constructeur de l'interface
+	 */
+	MainControler() {
 		view = new MainWindow(this);
-		
+
 		textFileChooser = new JFileChooser();
-		textFileChooser.setFileFilter(new FileNameExtensionFilter(
-				"Fichier Texte", "txt"));
-		
+		textFileChooser.setFileFilter(new FileNameExtensionFilter("Fichier Texte", "txt"));
+
 		soundFileSaver = new JFileChooser();
-		soundFileSaver.setFileFilter(new FileNameExtensionFilter(
-				"Fichier Son", "wav"));
+		soundFileSaver.setFileFilter(new FileNameExtensionFilter("Fichier Son", "wav"));
 	}
-	
-	public void run(){
+
+	/**
+	 * Méthode pour afficher l'interface
+	 */
+	public void run() {
 		view.setVisible();
 	}
-	
+
+	/**
+	 * Classe pour gérer l'event ChargerTxt
+	 */
 	public class ChargerTxtEvent extends MouseAdapter {
+		/**
+		 * Méthode pour redéfinir l'action du clic de la souris afin de charger
+		 * du texte
+		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			if(textFileChooser.showOpenDialog(viewFC) == JFileChooser.APPROVE_OPTION){
+			if (textFileChooser.showOpenDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
 				String res = "";
 				String filePath = textFileChooser.getSelectedFile().getAbsolutePath();
 				try {
@@ -64,45 +92,56 @@ public class MainControler {
 				}
 				view.setTexte(res);
 			}
-			
 		}
 	}
-	
+
+	/**
+	 * Classe pour gérer l'event SaveTxt
+	 */
 	public class SaveTxtEvent extends MouseAdapter {
+		/**
+		 * Méthode pour redéfinir l'action du clic de la souris afin de
+		 * sauvegarder du texte
+		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			if(view.recupererTexte().equals("")){
+			if (view.recupererTexte().equals("")) {
 				System.err.println("Texte Vide!");
-			}
-			else{
-				if(textFileChooser.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
+			} else {
+				if (textFileChooser.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
 					String fileLocation = textFileChooser.getSelectedFile().getAbsolutePath();
-			    	if(!fileLocation.endsWith(".txt"))
-			    		fileLocation = fileLocation + ".txt";
-			    	saveTxt(fileLocation, view.recupererTexte());
+					if (!fileLocation.endsWith(".txt"))
+						fileLocation = fileLocation + ".txt";
+					saveTxt(fileLocation, view.recupererTexte());
 				}
 			}
 		}
 	}
-	
+
+	/**
+	 * Classe pour gérer l'event Jouer
+	 */
 	public class JouerEvent extends MouseAdapter {
+		/**
+		 * Méthode pour redéfinir l'action du clic de la souris afin de jouer la
+		 * partition
+		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			FichierLy fichier = null;
-			if(view.recupererTexte().equals("")){
+			if (view.recupererTexte().equals("")) {
 				System.err.println("Texte Vide!");
-			}
-			else{
+			} else {
 				saveTxt("tmp.txt", view.recupererTexte());
-				
+
 				try {
 					fichier = new FichierLy("tmp.txt");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				Partition part = new Partition(fichier);
-				
+
 				try {
 					GenerateurSon.jouerMelodie(part);
 				} catch (LineUnavailableException e) {
@@ -111,57 +150,69 @@ public class MainControler {
 			}
 		}
 	}
-	
+
+	/**
+	 * Classe pour gérer l'event SaveSon
+	 */
 	public class SaveSonEvent extends MouseAdapter {
+		/**
+		 * Méthode pour redéfinir l'action du clic de la souris afin de
+		 * sauvegarder le fichier son
+		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			FichierLy fichier = null;
 
-			if(view.recupererTexte().equals("")){
+			if (view.recupererTexte().equals("")) {
 				System.err.println("Texte Vide!");
-			}
-			else{
+			} else {
 				saveTxt("tmp.txt", view.recupererTexte());
-				
+
 				try {
 					fichier = new FichierLy("tmp.txt");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				String fileLocation = "";
-				if(soundFileSaver.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
-			    	fileLocation = soundFileSaver.getSelectedFile().getAbsolutePath();
-			    	if(fileLocation.endsWith("/"))
-			            fileLocation += new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss", Locale.FRANCE).format(new Date());
-			    	if(!fileLocation.endsWith(".wav"))
-			    		fileLocation = fileLocation + ".wav";
-			    	
-			    	Partition part = new Partition(fichier);
-				
-			    	try {
-			    		CreationFichierAudio.saveWAV(part, fileLocation);
-			    	} catch (IOException e) {
-			    		e.printStackTrace();
-			    	}
+				if (soundFileSaver.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
+					fileLocation = soundFileSaver.getSelectedFile().getAbsolutePath();
+					if (!fileLocation.endsWith(".wav"))
+						fileLocation = fileLocation + ".wav";
+
+					Partition part = new Partition(fichier);
+
+					try {
+						CreationFichierAudio.saveWAV(part, fileLocation);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 	}
-	
-	public void saveTxt(String chemin, String str){
+
+	/**
+	 * Méthode d'enregistrement du fichier sonore
+	 * 
+	 * @param chemin
+	 *            Emplacement où sauvegarder le fichier
+	 * @param str
+	 *            Texte à sauvegarder
+	 */
+	public void saveTxt(String chemin, String str) {
 		PrintWriter fichier;
 		try {
 			fichier = new PrintWriter(new FileWriter(chemin));
-	    	fichier.println(view.recupererTexte());
-	    	fichier.close();
+			fichier.println(str);
+			fichier.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		MainControler app = new MainControler();
 		app.run();
 	}
