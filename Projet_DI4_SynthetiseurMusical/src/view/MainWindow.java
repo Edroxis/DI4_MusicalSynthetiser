@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import Controller.MainControler;
+import Controller.MainController;
 
 public class MainWindow {
 
@@ -19,7 +19,7 @@ public class MainWindow {
 	/**
 	 * Controleur de l'application
 	 */
-	private MainControler controler;
+	private MainController controller;
 
 	/**
 	 * Zone de texte
@@ -36,8 +36,8 @@ public class MainWindow {
 	/**
 	 * Constructeur pour la création de l'application
 	 */
-	public MainWindow(MainControler controler) {
-		this.controler = controler;
+	public MainWindow(MainController controller) {
+		this.controller = controller;
 		initialize();
 	}
 
@@ -46,7 +46,7 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 550, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
@@ -56,13 +56,13 @@ public class MainWindow {
 		JButton btnChargertxt = new JButton("Charger .txt");
 		panel.add(btnChargertxt);
 
-		JButton btnSavetxt = new JButton("Save .txt");
+		JButton btnSavetxt = new JButton("Sauvegarder .txt");
 		panel.add(btnSavetxt);
 
 		JButton btnJouerPartition = new JButton("Jouer Partition");
 		panel.add(btnJouerPartition);
 
-		JButton btnSavewav = new JButton("Save .wav");
+		JButton btnSavewav = new JButton("Sauvegarder .wav");
 		panel.add(btnSavewav);
 
 		JScrollPane scrollPane1 = new JScrollPane(panel);
@@ -75,10 +75,10 @@ public class MainWindow {
 		frame.getContentPane().add(scrollPane2, BorderLayout.CENTER);
 
 		// Listeners pour chacun des boutons
-		btnChargertxt.addMouseListener(controler.new ChargerTxtEvent());
-		btnSavetxt.addMouseListener(controler.new SaveTxtEvent());
-		btnJouerPartition.addMouseListener(controler.new JouerEvent());
-		btnSavewav.addMouseListener(controler.new SaveSonEvent());
+		btnChargertxt.addMouseListener(controller.new ChargerTxtEvent());
+		btnSavetxt.addMouseListener(controller.new SauvegarderTxtEvent());
+		btnJouerPartition.addMouseListener(controller.new JouerEvent());
+		btnSavewav.addMouseListener(controller.new SauvegarderSonEvent());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class MainWindow {
 	 * 
 	 * @return La chaîne de caractère de textArea
 	 */
-	public String recupererTexte() {
+	public String getTexte() {
 		return textArea.getText();
 	}
 }

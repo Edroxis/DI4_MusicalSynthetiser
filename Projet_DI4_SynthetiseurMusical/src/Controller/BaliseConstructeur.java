@@ -6,43 +6,45 @@ import Model.*;
  * Classe permettant la construction des balises
  */
 public class BaliseConstructeur {
-	//Constructeur
+	// Constructeur
 	/**
 	 * Constructeur en privé pour ne pas pouvoir instancier cette classe
 	 */
-	private BaliseConstructeur(){}
-	
-	//Methodes
+	private BaliseConstructeur() {
+	}
+
+	// Methodes
 	/**
-	 * @param str La chaîne qui décrit la balise
+	 * @param str
+	 *            La chaîne qui décrit la balise
 	 * @return La bonne balise construite
 	 */
-	public static Balise construireBalise(String str){
-		str = str.substring(1); //retirer le '\' du début
+	public static Balise construireBalise(String str) {
+		str = str.substring(1); // retirer le '\' du début
 		Balise res = null;
-		
-		//Si balise de modification du tempo
-		if(str.startsWith("tempo")){	
-			//Récupération de la nouvelle valeure du tempo
-			int indexEqual = str.indexOf("=")+1;
-			if(indexEqual != 0)
+
+		// Si balise de modification du tempo
+		if (str.startsWith("tempo")) {
+			// Récupération de la nouvelle valeure du tempo
+			int indexEqual = str.indexOf("=") + 1;
+			if (indexEqual != 0)
 				str = str.substring(indexEqual);
 			else
 				str = "80";
-			
+
 			res = new TempoModifier(Integer.parseInt(str));
-			
+
 			return res;
 		}
-		//Si balise modificateur d'armure
-		if(str.startsWith("armure")){
-			str = str.substring(str.indexOf("=")+1);
-			
+		// Si balise modificateur d'armure
+		if (str.startsWith("armure")) {
+			str = str.substring(str.indexOf("=") + 1);
+
 			res = new ArmureModifier(str);
-			
+
 			return res;
 		}
-		
+
 		System.err.println("Balise non reconnue: " + str);
 		return null;
 	}

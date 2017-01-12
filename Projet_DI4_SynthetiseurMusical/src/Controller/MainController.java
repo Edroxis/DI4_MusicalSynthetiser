@@ -24,7 +24,7 @@ import view.MainWindow;
 /**
  * Classe pour gérer le controleur de l'interface
  */
-public class MainControler {
+public class MainController {
 	/**
 	 * View de l'interface
 	 */
@@ -48,7 +48,7 @@ public class MainControler {
 	/**
 	 * Constructeur de l'interface
 	 */
-	MainControler() {
+	MainController() {
 		view = new MainWindow(this);
 
 		textFileChooser = new JFileChooser();
@@ -98,21 +98,21 @@ public class MainControler {
 	/**
 	 * Classe pour gérer l'event SaveTxt
 	 */
-	public class SaveTxtEvent extends MouseAdapter {
+	public class SauvegarderTxtEvent extends MouseAdapter {
 		/**
 		 * Méthode pour redéfinir l'action du clic de la souris afin de
 		 * sauvegarder du texte
 		 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			if (view.recupererTexte().equals("")) {
+			if (view.getTexte().equals("")) {
 				System.err.println("Texte Vide!");
 			} else {
 				if (textFileChooser.showSaveDialog(viewFC) == JFileChooser.APPROVE_OPTION) {
 					String fileLocation = textFileChooser.getSelectedFile().getAbsolutePath();
 					if (!fileLocation.endsWith(".txt"))
 						fileLocation = fileLocation + ".txt";
-					saveTxt(fileLocation, view.recupererTexte());
+					sauvegarderTxt(fileLocation, view.getTexte());
 				}
 			}
 		}
@@ -129,10 +129,10 @@ public class MainControler {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			FichierLy fichier = null;
-			if (view.recupererTexte().equals("")) {
+			if (view.getTexte().equals("")) {
 				System.err.println("Texte Vide!");
 			} else {
-				saveTxt("tmp.txt", view.recupererTexte());
+				sauvegarderTxt("tmp.txt", view.getTexte());
 
 				try {
 					fichier = new FichierLy("tmp.txt");
@@ -154,7 +154,7 @@ public class MainControler {
 	/**
 	 * Classe pour gérer l'event SaveSon
 	 */
-	public class SaveSonEvent extends MouseAdapter {
+	public class SauvegarderSonEvent extends MouseAdapter {
 		/**
 		 * Méthode pour redéfinir l'action du clic de la souris afin de
 		 * sauvegarder le fichier son
@@ -163,10 +163,10 @@ public class MainControler {
 		public void mouseClicked(MouseEvent arg0) {
 			FichierLy fichier = null;
 
-			if (view.recupererTexte().equals("")) {
+			if (view.getTexte().equals("")) {
 				System.err.println("Texte Vide!");
 			} else {
-				saveTxt("tmp.txt", view.recupererTexte());
+				sauvegarderTxt("tmp.txt", view.getTexte());
 
 				try {
 					fichier = new FichierLy("tmp.txt");
@@ -200,7 +200,7 @@ public class MainControler {
 	 * @param str
 	 *            Texte à sauvegarder
 	 */
-	public void saveTxt(String chemin, String str) {
+	public void sauvegarderTxt(String chemin, String str) {
 		PrintWriter fichier;
 		try {
 			fichier = new PrintWriter(new FileWriter(chemin));
@@ -213,7 +213,7 @@ public class MainControler {
 	}
 
 	public static void main(String[] args) {
-		MainControler app = new MainControler();
+		MainController app = new MainController();
 		app.run();
 	}
 }

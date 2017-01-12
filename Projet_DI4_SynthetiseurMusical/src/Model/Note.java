@@ -164,7 +164,7 @@ public class Note extends Playable {
 			hauteur = Octave.NONE;
 			return 0;
 		}
-		
+
 		// Trouver l'index de la note de l'enum Octave (sans altération)
 		numNote = trouverNote(firstLetter);
 
@@ -177,9 +177,9 @@ public class Note extends Playable {
 		return 0;
 	}
 
-	public int trouverNote(char firstLetter) {
+	private int trouverNote(char firstLetter) {
 		int numNote = (((int) firstLetter - (int) 'a' + 5) % 7) * 2;
-		
+
 		if (numNote > 5) // correction par rapport au 1/2 ton mi-fa
 			numNote--;
 		return numNote;
@@ -192,7 +192,7 @@ public class Note extends Playable {
 		String str = chaineCaracNote.substring(1);
 
 		var = null;
-		
+
 		// Si dièse
 		if (str.indexOf('d') != -1 || str.indexOf("is") != -1)
 			var = Variation.DIESE;
@@ -200,12 +200,12 @@ public class Note extends Playable {
 		// Si bémole
 		if (str.indexOf('b') != -1 || str.indexOf("es") != -1)
 			var = Variation.BEMOLE;
-		
-		//Si béquart
-		if(str.indexOf('n') != -1)
+
+		// Si béquart
+		if (str.indexOf('n') != -1)
 			var = Variation.NEUTRE;
 	}
-	
+
 	private int alterationNote(int numNote) {
 		if (var == Variation.DIESE)
 			numNote++;
@@ -219,15 +219,15 @@ public class Note extends Playable {
 		}
 		return numNote;
 	}
-	
-	public void recalculerVariation(){
-		if(Voix.getArmure().containsKey(hauteur)){
-			if(var == null){
+
+	private void recalculerVariation() {
+		if (Voix.getArmure().containsKey(hauteur)) {
+			if (var == null) {
 				int numNote = hauteur.toInt();
 				var = Voix.getArmure().get(hauteur);
-				
+
 				numNote = alterationNote(numNote);
-				
+
 				hauteur = Octave.getNote(numNote);
 				calculFrequ();
 			}
@@ -240,7 +240,7 @@ public class Note extends Playable {
 			numOctave++;
 			numNote %= 12;
 		}
-		
+
 		return numNote;
 	}
 
